@@ -66,7 +66,7 @@ title: Temple Owls Building AI Magic
     Each project solves a real problem for our faculty or students. Practical demand is the only requirement for a project to make the list.
   </p>
   <div class="projects-grid">
-    {% assign sorted_projects = site.projects | sort: "order" %}
+    {% assign sorted_projects = site.projects %}
     {% for project in sorted_projects %}
     <div class="project-card">
       <div class="project-card-header">
