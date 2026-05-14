@@ -1,0 +1,166 @@
+---
+layout: default
+title: Temple Owls Building AI Magic
+---
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Temple University · CIS Department</div>
+    <h1>
+      Building AI
+      <span class="accent">That Matters.</span>
+    </h1>
+    <p class="hero-sub">
+      OpenOwls is a student group at Temple University where we build real,
+      open-source AI-powered projects — useful tools that faculty actually use,
+      shipped in 4-week sprints.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">See Our Projects →</a>
+      <a href="#join" class="btn-secondary">Join the Group</a>
+    </div>
+  </div>
+  <div class="hero-owl">🦉</div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="section-label">Why OpenOwls</div>
+  <h2>The gap between<br>class and career.</h2>
+  <p class="section-intro">
+    Courses teach theory. The industry wants AI fluency and real deliverables.
+    OpenOwls bridges that gap by building actual tools, in the open, with modern AI workflows.
+  </p>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-icon">🎯</div>
+      <h3>Real Portfolio</h3>
+      <p>Ship projects employers can see on GitHub — not homework, but tools people actually use.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🤖</div>
+      <h3>AI Fluency</h3>
+      <p>Work with Claude Code, GitHub Copilot, and open-source LLMs from day one — the tools shaping modern engineering.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">⚡</div>
+      <h3>4-Week Sprints</h3>
+      <p>Ideate, build, demo, publish. Every sprint ends with something live. Momentum over perfection.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🔗</div>
+      <h3>Faculty-Backed</h3>
+      <p>Projects have real demand from Temple faculty — you're solving problems that matter, not toy exercises.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">What We're Building</div>
+  <h2>Current Projects</h2>
+  <p class="section-intro">
+    Each project solves a real problem for our faculty or students. Practical demand is the only requirement for a project to make the list.
+  </p>
+  <div class="projects-grid">
+    {% assign sorted_projects = site.projects | sort: "order" %}
+    {% for project in sorted_projects %}
+    <div class="project-card">
+      <div class="project-card-header">
+        <div class="project-icon">{{ project.icon | default: "🦉" }}</div>
+        <span class="project-status status-{{ project.status | default: 'planned' }}">
+          {{ project.status | default: "Planned" | capitalize }}
+        </span>
+      </div>
+      <div class="project-card-body">
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.description }}</p>
+      </div>
+      {% if project.tags %}
+      <div class="project-tags">
+        {% for tag in project.tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="project-card-footer">
+        <a href="{{ project.url | relative_url }}">Learn more →</a>
+        {% if project.github %}
+        <a href="{{ project.github }}" target="_blank" rel="noopener">GitHub ↗</a>
+        {% endif %}
+        {% if project.demo %}
+        <a href="{{ project.demo }}" target="_blank" rel="noopener">Demo ↗</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how" id="how">
+  <div class="section-label">The Process</div>
+  <h2>One sprint.<br>One shipped project.</h2>
+  <p class="section-intro">
+    Every 4 weeks is a new sprint, a new project, a new skill unlocked.
+  </p>
+  <div class="sprint-steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Ideate</h3>
+      <p>Pick a real problem. AI tools help with research and scoping.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Build</h3>
+      <p>Pair with AI — Claude Code, Copilot — to ship fast.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Demo</h3>
+      <p>Present to peers and faculty. Get real feedback.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>Publish</h3>
+      <p>Open-source it. Build your portfolio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section id="join">
+  <div class="join-box">
+    <div>
+      <div class="section-label">Ready to Build?</div>
+      <h2>Join OpenOwls<br>this summer.</h2>
+      <p>
+        We meet every other week. Everything we build is open-source and community-first.
+        First sprint kicks off soon — bring your curiosity and your laptop.
+      </p>
+      <div class="join-actions">
+        <a href="mailto:{{ site.email }}" class="btn-primary">Email Us to Join →</a>
+        <a href="{{ site.github_org }}" class="btn-secondary" target="_blank" rel="noopener">GitHub Org ↗</a>
+      </div>
+    </div>
+    <div class="join-details">
+      <h3>Requirements to Join</h3>
+      <ul class="req-list">
+        <li>Major or minor in Computer Science</li>
+        <li>At least one programming course completed</li>
+        <li>Projects chosen from a faculty-sponsored list</li>
+        <li>Curiosity about AI tools and workflows</li>
+      </ul>
+      <div style="margin-top:2rem;">
+        <h3>Directors</h3>
+        <ul class="req-list">
+          <li>Prof. Alex Pang</li>
+          <li>Prof. John Fiore</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

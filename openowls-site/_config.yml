@@ -1,0 +1,23 @@
+title: OpenOwls
+description: Temple Owls Building AI Magic — A student group for building real projects with AI coding tools.
+url: "https://OpenOwls-at-Temple.github.io"
+baseurl: ""
+
+email: openowls@temple.edu
+github_org: https://github.com/OpenOwls-at-Temple
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag

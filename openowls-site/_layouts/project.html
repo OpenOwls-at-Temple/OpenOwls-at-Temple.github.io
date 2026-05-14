@@ -1,0 +1,52 @@
+---
+layout: default
+---
+<main style="padding-top: 6rem;">
+  <article style="max-width: 760px; margin: 0 auto; padding: 3rem;">
+    <a href="{{ '/projects' | relative_url }}" style="font-size: 0.85rem; color: var(--gray); display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">← All Projects</a>
+
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+      <div class="project-icon" style="width:64px;height:64px;font-size:2rem;">{{ page.icon | default: "🦉" }}</div>
+      <div>
+        <span class="project-status status-{{ page.status | default: 'planned' }}">{{ page.status | default: "Planned" | capitalize }}</span>
+      </div>
+    </div>
+
+    <h1 style="font-family:var(--font-display);font-size:2.5rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:1rem;">{{ page.title }}</h1>
+    <p style="color:var(--gray-light);font-size:1.1rem;line-height:1.7;margin-bottom:2rem;">{{ page.description }}</p>
+
+    {% if page.tags %}
+    <div class="project-tags" style="padding:0;margin-bottom:2rem;">
+      {% for tag in page.tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if page.github or page.demo %}
+    <div style="display:flex;gap:1rem;margin-bottom:3rem;flex-wrap:wrap;">
+      {% if page.github %}
+      <a href="{{ page.github }}" class="btn-secondary" target="_blank" rel="noopener">⌥ GitHub</a>
+      {% endif %}
+      {% if page.demo %}
+      <a href="{{ page.demo }}" class="btn-primary" target="_blank" rel="noopener">▶ Live Demo</a>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div style="border-top:1px solid var(--border);padding-top:2rem;color:var(--gray-light);line-height:1.8;">
+      {{ content }}
+    </div>
+
+    {% if page.contributors %}
+    <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);">
+      <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Built by</p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+        {% for person in page.contributors %}
+        <span class="tag">{{ person }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </article>
+</main>
