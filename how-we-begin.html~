@@ -1,0 +1,107 @@
+---
+layout: default
+title: How We Begin
+description: The origin story of OpenOwls at Temple University.
+---
+
+<main style="padding-top: 7rem;">
+
+  <!-- ORIGIN PARAGRAPH -->
+  <section style="padding: 4rem 3rem 0; max-width: 1100px; margin: 0 auto;">
+    <div class="section-label">Our Origin Story</div>
+    <h2>How We Begin</h2>
+    <p style="color: var(--gray-light); font-size: 1.05rem; line-height: 1.85; max-width: 680px; margin-top: 1.25rem;">
+      OpenOwls was born in the summer of 2026 — not from a grant, a committee, or a strategic plan,
+      but from a single conversation and a tight deadline. Our founder, Professor X-Owl, saw a gap
+      between what students were learning in class and what the industry was demanding, and decided
+      to do something about it. What started as a simple question — <em>can AI help us work faster
+      and better?</em> — became a movement. This is where it began.
+    </p>
+  </section>
+
+  <!-- PROFESSOR X-OWL -->
+  <section class="prof-section" id="professor" style="padding-top: 4rem;">
+    <div class="prof-inner">
+      <div class="prof-img-wrap">
+        <img src="{{ '/assets/images/professor-x-owl.png' | relative_url }}" alt="Professor X-Owl" class="prof-img" />
+        <div class="prof-img-glow"></div>
+      </div>
+      <div class="prof-content">
+        <div class="section-label">Our Founder</div>
+        <h2>Professor X-Owl</h2>
+        <span class="prof-tagline"><em>&ldquo;Mind. Code. Create the Future.&rdquo;</em></span>
+        <p class="prof-bio">
+          Little is known about the enigmatic Professor X-Owl &mdash; and that is precisely how he prefers it.
+          Rumor has it he possesses rare <strong>telegraphic abilities</strong>, capable of sensing a
+          student&rsquo;s hidden potential before they&rsquo;ve written a single line of code.
+        </p>
+        <p class="prof-bio">
+          Before founding OpenOwls, he is said to have run a secretive school for gifted individuals &mdash;
+          students with extraordinary abilities who needed only the right mentor to unlock them.
+          The school&rsquo;s motto: <em>&ldquo;Every owl has a superpower waiting to be unleashed.&rdquo;</em>
+        </p>
+        <p class="prof-bio">
+          Some in the cryptography world whisper that Professor X-Owl may also be the mysterious
+          <strong>Hootoshi Nakaowlto</strong> &mdash; the pseudonymous mind behind a certain revolutionary
+          decentralized ledger that changed the world&rsquo;s relationship with trust and money.
+          He has neither confirmed nor denied this. He simply adjusts his glasses, taps his temple, and smiles.
+        </p>
+        <p class="prof-bio">
+          Today, Professor X-Owl leads OpenOwls with one mission: to find the next generation of
+          AI-powered engineers at Temple University and give them the tools, the projects, and the
+          community to build things that matter.
+        </p>
+        <div class="prof-quote">
+          &ldquo;I don&rsquo;t teach students to write code. I teach them to think like builders &mdash; and then I get out of their way.&rdquo;
+          <cite>&mdash; Professor X-Owl</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GROUP PHOTO -->
+  <section class="group-section" id="community">
+    <div class="section-label">The Team</div>
+    <h2>First Meeting of the Owls</h2>
+    <p class="section-intro">
+      Every great movement starts with a room full of people who believe they can build something better.
+      This is ours.
+    </p>
+    <div class="group-photo-wrap">
+      <img src="{{ '/assets/images/group-picture.png' | relative_url }}" alt="First OpenOwls group meeting at Temple University" class="group-photo" />
+      <div class="group-photo-caption">
+        <span>🦉</span>
+        OpenOwls &middot; First Sprint &middot; Temple University &middot; Summer 2026
+      </div>
+    </div>
+  </section>
+
+  <!-- ASSISTANTS -->
+  <section style="padding: 5rem 3rem; background: var(--navy);" id="assistants">
+    <div class="section-label">Supporting the Mission</div>
+    <h2>Professor X-Owl&rsquo;s<br>Assistants</h2>
+    <p class="section-intro">
+      While he directs the overall vision, he trusts his lieutenants completely &mdash;
+      in practice, these two are the ones who keep OpenOwls running.
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 700px;">
+      <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; display: flex; align-items: center; gap: 1.25rem; transition: transform .2s, border-color .2s;">
+        <div style="width:54px;height:54px;border-radius:50%;background:rgba(245,197,24,.12);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🦉</div>
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:.2rem;">Prof. Alex Pang</h3>
+          <p style="color:var(--gray);font-size:.82rem;">Department of Computer &amp; Information Sciences, Temple University</p>
+          <span style="display:inline-block;margin-top:.4rem;font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);background:rgba(245,197,24,.1);border:1px solid var(--border);padding:.2rem .6rem;border-radius:100px;">Assistant to Prof. X-Owl</span>
+        </div>
+      </div>
+      <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; display: flex; align-items: center; gap: 1.25rem; transition: transform .2s, border-color .2s;">
+        <div style="width:54px;height:54px;border-radius:50%;background:rgba(245,197,24,.12);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🦉</div>
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:.2rem;">Sonny Chang</h3>
+          <p style="color:var(--gray);font-size:.82rem;">Department of Computer &amp; Information Sciences, Temple University</p>
+          <span style="display:inline-block;margin-top:.4rem;font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);background:rgba(245,197,24,.1);border:1px solid var(--border);padding:.2rem .6rem;border-radius:100px;">Assistant to Prof. X-Owl</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>

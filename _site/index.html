@@ -1,9 +1,46 @@
----
-layout: default
-title: Temple Owls Building AI Magic
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Temple Owls Building AI Magic — OpenOwls</title>
+  <meta name="description" content="Temple Owls Building AI Magic — A student group for building real projects with AI coding tools." />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Temple Owls Building AI Magic | OpenOwls</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Temple Owls Building AI Magic" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Temple Owls Building AI Magic — A student group for building real projects with AI coding tools." />
+<meta name="twitter:description" property="og:description" content="Temple Owls Building AI Magic — A student group for building real projects with AI coding tools." />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
+<meta property="og:site_name" content="OpenOwls" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Temple Owls Building AI Magic" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"Temple Owls Building AI Magic — A student group for building real projects with AI coding tools.","headline":"Temple Owls Building AI Magic","name":"OpenOwls","url":"http://localhost:4000/"}</script>
+<!-- End Jekyll SEO tag -->
 
-<!-- HERO -->
+</head>
+<body>
+  <nav>
+  <a href="/" class="nav-logo">
+    <div class="owl-icon">🦉</div>
+    OpenOwls
+  </a>
+  <ul class="nav-links">
+    <li><a href="/#projects">Projects</a></li>
+    <li><a href="/#how">How It Works</a></li>
+    <li><a href="/#join">Join</a></li>
+    <li><a href="https://github.com/OpenOwls-at-Temple" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="/how-we-begin">How We Begin</a></li>
+    <li><a href="mailto:openowls@temple.edu" class="nav-cta">Email Us</a></li>
+  </ul>
+</nav>
+
+  <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
@@ -66,37 +103,111 @@ title: Temple Owls Building AI Magic
     Each project solves a real problem for our faculty or students. Practical demand is the only requirement for a project to make the list.
   </p>
   <div class="projects-grid">
-    {% assign sorted_projects = site.projects %}
-    {% for project in sorted_projects %}
+    
+    
     <div class="project-card">
       <div class="project-card-header">
-        <div class="project-icon">{{ project.icon | default: "🦉" }}</div>
-        <span class="project-status status-{{ project.status | default: 'planned' }}">
-          {{ project.status | default: "Planned" | capitalize }}
+        <div class="project-icon">♿</div>
+        <span class="project-status status-building">
+          Building
         </span>
       </div>
       <div class="project-card-body">
-        <h3>{{ project.title }}</h3>
-        <p>{{ project.description }}</p>
+        <h3>Accessibility Automator</h3>
+        <p>An AI-powered tool that scans course slide decks for WCAG accessibility violations — missing alt text, low contrast, broken reading order — and suggests fixes automatically. Built to solve the real deadline pressure Temple faculty face with accessibility compliance.</p>
       </div>
-      {% if project.tags %}
+      
       <div class="project-tags">
-        {% for tag in project.tags %}
-        <span class="tag">{{ tag }}</span>
-        {% endfor %}
+        
+        <span class="tag">Python</span>
+        
+        <span class="tag">Canvas API</span>
+        
+        <span class="tag">Claude AI</span>
+        
+        <span class="tag">WCAG</span>
+        
+        <span class="tag">PowerPoint</span>
+        
       </div>
-      {% endif %}
+      
       <div class="project-card-footer">
-        <a href="{{ project.url | relative_url }}">Learn more →</a>
-        {% if project.github %}
-        <a href="{{ project.github }}" target="_blank" rel="noopener">GitHub ↗</a>
-        {% endif %}
-        {% if project.demo %}
-        <a href="{{ project.demo }}" target="_blank" rel="noopener">Demo ↗</a>
-        {% endif %}
+        <a href="/projects/accessibility-automator/">Learn more →</a>
+        
+        <a href="https://github.com/OpenOwls-at-Temple/accessibility-automator" target="_blank" rel="noopener">GitHub ↗</a>
+        
+        
       </div>
     </div>
-    {% endfor %}
+    
+    <div class="project-card">
+      <div class="project-card-header">
+        <div class="project-icon">💼</div>
+        <span class="project-status status-planned">
+          Planned
+        </span>
+      </div>
+      <div class="project-card-body">
+        <h3>AI Career Coach</h3>
+        <p>A personalized AI career management app for Temple CS seniors — resume analysis, job match scoring, interview prep, and application tracking, all tailored to the current tech job market.</p>
+      </div>
+      
+      <div class="project-tags">
+        
+        <span class="tag">React</span>
+        
+        <span class="tag">Python</span>
+        
+        <span class="tag">Claude AI</span>
+        
+        <span class="tag">Resume Parsing</span>
+        
+        <span class="tag">Job APIs</span>
+        
+      </div>
+      
+      <div class="project-card-footer">
+        <a href="/projects/ai-career-coach/">Learn more →</a>
+        
+        
+      </div>
+    </div>
+    
+    <div class="project-card">
+      <div class="project-card-header">
+        <div class="project-icon">🎯</div>
+        <span class="project-status status-building">
+          Building
+        </span>
+      </div>
+      <div class="project-card-body">
+        <h3>Owl Jeopardy</h3>
+        <p>An AI-powered Jeopardy-style review game that ingests your Canvas course materials and automatically generates categories and questions — so faculty can run an engaging last-lecture review session without writing a single question by hand.</p>
+      </div>
+      
+      <div class="project-tags">
+        
+        <span class="tag">React</span>
+        
+        <span class="tag">Canvas API</span>
+        
+        <span class="tag">Claude AI</span>
+        
+        <span class="tag">Node.js</span>
+        
+        <span class="tag">WebSockets</span>
+        
+      </div>
+      
+      <div class="project-card-footer">
+        <a href="/projects/owl-jeopardy/">Learn more →</a>
+        
+        <a href="https://github.com/OpenOwls-at-Temple/owl-jeopardy" target="_blank" rel="noopener">GitHub ↗</a>
+        
+        
+      </div>
+    </div>
+    
   </div>
 </section>
 
@@ -135,7 +246,7 @@ title: Temple Owls Building AI Magic
 <section class="prof-section" id="professor">
   <div class="prof-inner">
     <div class="prof-image-wrap">
-      <img src="{{ '/assets/images/professor-x-owl.png' | relative_url }}" alt="Professor X-Owl, founder of OpenOwls" class="prof-image" />
+      <img src="/assets/images/professor-x-owl.png" alt="Professor X-Owl, founder of OpenOwls" class="prof-image" />
       <div class="prof-image-glow"></div>
     </div>
     <div class="prof-content">
@@ -183,8 +294,8 @@ title: Temple Owls Building AI Magic
         First sprint kicks off soon — bring your curiosity and your laptop.
       </p>
       <div class="join-actions">
-        <a href="mailto:{{ site.email }}" class="btn-primary">Email Us to Join →</a>
-        <a href="{{ site.github_org }}" class="btn-secondary" target="_blank" rel="noopener">GitHub Org ↗</a>
+        <a href="mailto:openowls@temple.edu" class="btn-primary">Email Us to Join →</a>
+        <a href="https://github.com/OpenOwls-at-Temple" class="btn-secondary" target="_blank" rel="noopener">GitHub Org ↗</a>
       </div>
     </div>
     <div class="join-details">
@@ -207,3 +318,16 @@ title: Temple Owls Building AI Magic
     </div>
   </div>
 </section>
+
+  <footer>
+  <div class="footer-logo">Open<span>Owls</span></div>
+  <p>Temple Owls Building AI Magic · Department of Computer &amp; Information Sciences</p>
+  <p style="margin-top:1rem;">
+    <a href="mailto:openowls@temple.edu">openowls@temple.edu</a> &nbsp;·&nbsp;
+    <a href="https://github.com/OpenOwls-at-Temple" target="_blank" rel="noopener">GitHub</a>
+  </p>
+  <p style="margin-top:1.5rem; font-size:0.78rem; opacity:0.5;">© 2026 OpenOwls at Temple University</p>
+</footer>
+
+</body>
+</html>

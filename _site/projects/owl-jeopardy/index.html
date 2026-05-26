@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Owl Jeopardy — OpenOwls</title>
+  <meta name="description" content="An AI-powered Jeopardy-style review game that ingests your Canvas course materials and automatically generates categories and questions — so faculty can run an engaging last-lecture review session without writing a single question by hand." />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Owl Jeopardy | OpenOwls</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Owl Jeopardy" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An AI-powered Jeopardy-style review game that ingests your Canvas course materials and automatically generates categories and questions — so faculty can run an engaging last-lecture review session without writing a single question by hand." />
+<meta name="twitter:description" property="og:description" content="An AI-powered Jeopardy-style review game that ingests your Canvas course materials and automatically generates categories and questions — so faculty can run an engaging last-lecture review session without writing a single question by hand." />
+<link rel="canonical" href="http://localhost:4000/projects/owl-jeopardy/" />
+<meta property="og:url" content="http://localhost:4000/projects/owl-jeopardy/" />
+<meta property="og:site_name" content="OpenOwls" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-05-25T23:36:04-04:00" />
+<meta property="article:modified_time" content="2026-05-25T23:36:04-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Owl Jeopardy" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-25T23:36:04-04:00","datePublished":"2026-05-25T23:36:04-04:00","description":"An AI-powered Jeopardy-style review game that ingests your Canvas course materials and automatically generates categories and questions — so faculty can run an engaging last-lecture review session without writing a single question by hand.","headline":"Owl Jeopardy","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/projects/owl-jeopardy/"},"url":"http://localhost:4000/projects/owl-jeopardy/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+  <nav>
+  <a href="/" class="nav-logo">
+    <div class="owl-icon">🦉</div>
+    OpenOwls
+  </a>
+  <ul class="nav-links">
+    <li><a href="/#projects">Projects</a></li>
+    <li><a href="/#how">How It Works</a></li>
+    <li><a href="/#join">Join</a></li>
+    <li><a href="https://github.com/OpenOwls-at-Temple" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="/how-we-begin">How We Begin</a></li>
+    <li><a href="mailto:openowls@temple.edu" class="nav-cta">Email Us</a></li>
+  </ul>
+</nav>
+
+  <main style="padding-top: 6rem;">
+  <article style="max-width: 760px; margin: 0 auto; padding: 3rem;">
+    <a href="/projects" style="font-size: 0.85rem; color: var(--gray); display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:2rem;">← All Projects</a>
+
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+      <div class="project-icon" style="width:64px;height:64px;font-size:2rem;">🎯</div>
+      <div>
+        <span class="project-status status-building">Building</span>
+      </div>
+    </div>
+
+    <h1 style="font-family:var(--font-display);font-size:2.5rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:1rem;">Owl Jeopardy</h1>
+    <p style="color:var(--gray-light);font-size:1.1rem;line-height:1.7;margin-bottom:2rem;">An AI-powered Jeopardy-style review game that ingests your Canvas course materials and automatically generates categories and questions — so faculty can run an engaging last-lecture review session without writing a single question by hand.</p>
+
+    
+    <div class="project-tags" style="padding:0;margin-bottom:2rem;">
+      
+      <span class="tag">React</span>
+      
+      <span class="tag">Canvas API</span>
+      
+      <span class="tag">Claude AI</span>
+      
+      <span class="tag">Node.js</span>
+      
+      <span class="tag">WebSockets</span>
+      
+    </div>
+    
+
+    
+    <div style="display:flex;gap:1rem;margin-bottom:3rem;flex-wrap:wrap;">
+      
+      <a href="https://github.com/OpenOwls-at-Temple/owl-jeopardy" class="btn-secondary" target="_blank" rel="noopener">⌥ GitHub</a>
+      
+      
+    </div>
+    
+
+    <div style="border-top:1px solid var(--border);padding-top:2rem;color:var(--gray-light);line-height:1.8;">
+      <h2 id="the-problem">The Problem</h2>
+
+<p>Professors love using Jeopardy as a review game for the last lecture. Commercial tools like JeopardyLabs require manually entering every question. That takes time faculty don’t have — and the questions can’t pull from the actual course material automatically.</p>
+
+<h2 id="what-were-building">What We’re Building</h2>
+
+<p>A web app where a faculty member pastes in their Canvas course ID, and the tool:</p>
+
+<ol>
+  <li>Pulls slides, notes, and quiz content via the Canvas API</li>
+  <li>Sends them to an LLM to generate Jeopardy-style categories and Q&amp;A pairs</li>
+  <li>Launches a live, playable game board in the browser</li>
+  <li>Supports buzzer-style play with score tracking for teams</li>
+</ol>
+
+<p>The key differentiator: <strong>the game builds itself from your course content</strong>. No manual question entry.</p>
+
+<h2 id="tech-stack">Tech Stack</h2>
+
+<ul>
+  <li><strong>Frontend</strong>: React game board with real-time updates</li>
+  <li><strong>Backend</strong>: Node.js + Canvas API for content ingestion</li>
+  <li><strong>AI layer</strong>: Claude API for question generation</li>
+  <li><strong>Live play</strong>: WebSockets for buzzer synchronization</li>
+</ul>
+
+<h2 id="get-involved">Get Involved</h2>
+
+<p>Interested in contributing? Check out the GitHub repo or email us.</p>
+
+    </div>
+
+    
+  </article>
+</main>
+
+  <footer>
+  <div class="footer-logo">Open<span>Owls</span></div>
+  <p>Temple Owls Building AI Magic · Department of Computer &amp; Information Sciences</p>
+  <p style="margin-top:1rem;">
+    <a href="mailto:openowls@temple.edu">openowls@temple.edu</a> &nbsp;·&nbsp;
+    <a href="https://github.com/OpenOwls-at-Temple" target="_blank" rel="noopener">GitHub</a>
+  </p>
+  <p style="margin-top:1.5rem; font-size:0.78rem; opacity:0.5;">© 2026 OpenOwls at Temple University</p>
+</footer>
+
+</body>
+</html>
