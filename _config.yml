@@ -10,6 +10,9 @@ collections:
   projects:
     output: true
     permalink: /projects/:name/
+  posts:
+    output: true
+    permalink: /blog/:name/
 
 defaults:
   - scope:
@@ -17,6 +20,11 @@ defaults:
       type: "projects"
     values:
       layout: "project"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
 
 plugins:
   - jekyll-feed

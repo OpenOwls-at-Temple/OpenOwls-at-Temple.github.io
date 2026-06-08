@@ -6,7 +6,7 @@ icon: 🎯
 status: building
 order: 2
 tags: [React, Canvas API, Claude AI, Node.js, WebSockets]
-github: https://github.com/OpenOwls-at-Temple/owl-jeopardy
+github: tba
 ---
 
 ## The Problem

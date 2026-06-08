@@ -26,10 +26,17 @@ layout: default
     {% if page.github or page.demo %}
     <div style="display:flex;gap:1rem;margin-bottom:3rem;flex-wrap:wrap;">
       {% if page.github %}
-      <a href="{{ page.github }}" class="btn-secondary" target="_blank" rel="noopener">⌥ GitHub</a>
+        {% if page.github == "tba" %}
+        <span class="btn-secondary" style="opacity:0.5;cursor:default;">⌥ GitHub – To be announced</span>
+        {% else %}
+        <a href="{{ page.github }}" class="btn-secondary" target="_blank" rel="noopener">⌥ GitHub</a>
+        {% endif %}
       {% endif %}
       {% if page.demo %}
       <a href="{{ page.demo }}" class="btn-primary" target="_blank" rel="noopener">▶ Live Demo</a>
+      {% endif %}
+      {% if page.blog_post %}
+      <a href="{{ page.blog_post | relative_url }}" class="btn-secondary">✍️ Student Blog</a>
       {% endif %}
     </div>
     {% endif %}

@@ -6,7 +6,7 @@ icon: ♿
 status: building
 order: 1
 tags: [Python, Canvas API, Claude AI, WCAG, PowerPoint]
-github: https://github.com/OpenOwls-at-Temple/accessibility-automator
+github: tba
 ---
 
 ## The Problem

@@ -63,7 +63,7 @@ title: Temple Owls Building AI Magic
   <div class="section-label">What We're Building</div>
   <h2>Current Projects</h2>
   <p class="section-intro">
-    Each project solves a real problem for our faculty or students. Practical demand is the only requirement for a project to make the list.
+    Each project solves a real problem for our faculty or students. Projects span categories including AI in Education and AI in Finance — practical demand is the only requirement to make the list.
   </p>
   <div class="projects-grid">
     {% assign sorted_projects = site.projects %}
@@ -89,10 +89,17 @@ title: Temple Owls Building AI Magic
       <div class="project-card-footer">
         <a href="{{ project.url | relative_url }}">Learn more →</a>
         {% if project.github %}
-        <a href="{{ project.github }}" target="_blank" rel="noopener">GitHub ↗</a>
+          {% if project.github == "tba" %}
+          <span style="color:var(--gray);font-size:0.85rem;">GitHub – To be announced</span>
+          {% else %}
+          <a href="{{ project.github }}" target="_blank" rel="noopener">GitHub ↗</a>
+          {% endif %}
         {% endif %}
         {% if project.demo %}
         <a href="{{ project.demo }}" target="_blank" rel="noopener">Demo ↗</a>
+        {% endif %}
+        {% if project.blog_post %}
+        <a href="{{ project.blog_post | relative_url }}">Student Blog →</a>
         {% endif %}
       </div>
     </div>
@@ -131,45 +138,14 @@ title: Temple Owls Building AI Magic
   </div>
 </section>
 
-<!-- PROFESSOR X-OWL -->
-<section class="prof-section" id="professor">
-  <div class="prof-inner">
-    <div class="prof-image-wrap">
-      <img src="{{ '/assets/images/professor-x-owl.png' | relative_url }}" alt="Professor X-Owl, founder of OpenOwls" class="prof-image" />
-      <div class="prof-image-glow"></div>
-    </div>
-    <div class="prof-content">
-      <div class="section-label">Our Founder</div>
-      <h2>Professor X-Owl</h2>
-      <p class="prof-tagline"><em>"Mind. Code. Create the Future."</em></p>
-      <p class="prof-bio">
-        Little is known about the enigmatic Professor X-Owl — and that is precisely how he prefers it.
-        Rumor has it he possesses rare <strong>telegraphic abilities</strong>, capable of sensing a
-        student's hidden potential before they've written a single line of code.
-      </p>
-      <p class="prof-bio">
-        Before founding OpenOwls, he is said to have run a secretive school for gifted individuals —
-        students with extraordinary abilities who needed only the right mentor to unlock them.
-        The school's motto: <em>"Every owl has a superpower waiting to be unleashed."</em>
-      </p>
-      <p class="prof-bio">
-        Some in the cryptography world whisper that Professor X-Owl may also be the mysterious
-        <strong>Hootoshi Nakaowlto</strong> — the pseudonymous mind behind a certain revolutionary
-        decentralized ledger that changed the world's relationship with trust and money.
-        He has neither confirmed nor denied this. He simply adjusts his glasses,
-        taps his temple, and smiles.
-      </p>
-      <p class="prof-bio">
-        Today, Professor X-Owl leads OpenOwls with one mission: to find the next generation of
-        AI-powered engineers at Temple University and give them the tools, the projects, and the
-        community to build things that matter.
-      </p>
-      <div class="prof-quote">
-        "I don't teach students to write code. I teach them to think like builders — and then I get out of their way."
-        <span>— Professor X-Owl</span>
-      </div>
-    </div>
-  </div>
+<!-- FOUNDER TEASER -->
+<section class="founder-teaser" id="professor">
+  <div class="section-label">Our Story</div>
+  <h2>How We Begin</h2>
+  <p>
+    OpenOwls was founded by the enigmatic <strong>Professor X-Owl</strong> —
+    curious about how it all began? <a href="{{ '/how-we-begin' | relative_url }}">Read our origin story →</a>
+  </p>
 </section>
 
 <!-- JOIN -->

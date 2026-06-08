@@ -3,7 +3,7 @@
     <div class="owl-icon">🦉</div>
     OpenOwls
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="{{ '/#projects' | relative_url }}">Projects</a></li>
     <li><a href="{{ '/#how' | relative_url }}">How It Works</a></li>
     <li><a href="{{ '/#join' | relative_url }}">Join</a></li>
@@ -11,4 +11,23 @@
     <li><a href="{{ '/how-we-begin' | relative_url }}">How We Begin</a></li>
     <li><a href="mailto:{{ site.email }}" class="nav-cta">Email Us</a></li>
   </ul>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<script>
+  const hamburger = document.getElementById('nav-hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('nav-open');
+    hamburger.classList.toggle('nav-hamburger--open');
+  });
+  // Close menu when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('nav-open');
+      hamburger.classList.remove('nav-hamburger--open');
+    });
+  });
+</script>
