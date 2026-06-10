@@ -314,6 +314,7 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">features.md</span>              <span class="ft-note">← Phase 1 / 2 / 3 feature definitions</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">architecture-planning.md</span> <span class="ft-note">← folder structure, design decisions, API</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">domain-knowledge.md</span>      <span class="ft-note">← terminology, business rules, constraints</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">llm-integration.md</span>       <span class="ft-note">← model choice, prompts, context strategy, guardrails</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">conventions.md</span>           <span class="ft-note">← coding style, git rules, testing requirements</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="ft-file">deployment.md</span>            <span class="ft-note">← hosting, environment variables, deploy steps</span></div>
     </div>
@@ -342,12 +343,17 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
       <div class="file-card">
         <div class="fc-name">ai_specs/architecture-planning.md</div>
         <div class="fc-audience">Audience: Architect / Engineer</div>
-        <p>Folder structure, design decisions, data models, API endpoints, LLM integration plan, and environment variables.</p>
+        <p>Folder structure, design decisions, data models, and API endpoints. For LLM-specific integration details, see <code>llm-integration.md</code>.</p>
       </div>
       <div class="file-card">
         <div class="fc-name">ai_specs/domain-knowledge.md</div>
         <div class="fc-audience">Audience: AI Assistant + Team</div>
         <p>Domain terminology, business rules, common pitfalls, and external dependencies the AI needs to know upfront.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/llm-integration.md</div>
+        <div class="fc-audience">Audience: Engineer / Faculty</div>
+        <p>Model choice and justification, system prompt, prompt templates per feature, context strategy, guardrails, and cost considerations.</p>
       </div>
       <div class="file-card">
         <div class="fc-name">ai_specs/conventions.md</div>
@@ -396,6 +402,11 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
           <td>domain-knowledge.md</td>
           <td><span class="badge badge-both">Faculty + Students</span></td>
           <td>Faculty seeds domain concepts. Students research and expand throughout the project.</td>
+        </tr>
+        <tr>
+          <td>llm-integration.md</td>
+          <td><span class="badge badge-both">Faculty + Students</span></td>
+          <td>Faculty defines model choice and guardrails. Students design the prompt templates and context strategy for each feature.</td>
         </tr>
         <tr>
           <td>conventions.md</td>
