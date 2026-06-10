@@ -1,0 +1,226 @@
+---
+layout: default
+title: Blog & Resources
+description: Stories from OpenOwls students, faculty, and industry collaborators — plus guides and resources.
+---
+
+<style>
+  :root { --nav-h: 74px; }
+
+  /* ── TWO-PANEL SHELL ── */
+  .blog-wrap {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    height: calc(100vh - var(--nav-h));
+    margin-top: var(--nav-h);
+    overflow: hidden;
+  }
+
+  /* ── LEFT PANEL ── */
+  .blog-left {
+    background: var(--navy-mid);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 2rem 0 3rem;
+  }
+
+  .left-section { margin-bottom: 2rem; }
+
+  .left-section-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 0 1.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .panel-link {
+    display: block;
+    padding: 0.45rem 1.5rem 0.45rem 1.75rem;
+    font-size: 0.85rem;
+    color: var(--gray-light);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+    transition: color 0.15s, background 0.15s, border-color 0.15s;
+    cursor: pointer;
+  }
+
+  .panel-link:hover {
+    color: var(--gold);
+    background: rgba(245,197,24,0.05);
+    border-left-color: rgba(245,197,24,0.3);
+  }
+
+  .panel-link.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: rgba(245,197,24,0.08);
+  }
+
+  .panel-empty {
+    display: block;
+    padding: 0.35rem 1.75rem;
+    font-size: 0.8rem;
+    color: var(--gray);
+    opacity: 0.5;
+    font-style: italic;
+  }
+
+  /* ── RIGHT PANEL ── */
+  .blog-right {
+    overflow-y: auto;
+    background: var(--navy);
+  }
+
+  /* Welcome / loading state */
+  .blog-welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 3rem;
+    color: var(--gray);
+  }
+
+  .blog-welcome .owl { font-size: 4rem; margin-bottom: 1.25rem; opacity: 0.2; }
+  .blog-welcome p { font-size: 0.95rem; line-height: 1.7; }
+
+  /* Strip nav-offset padding from injected content */
+  .blog-right main     { padding-top: 1.5rem !important; }
+  .blog-right .sdd-hero { padding-top: 3rem !important; }
+
+  /* ── MOBILE: stack panels ── */
+  @media (max-width: 768px) {
+    .blog-wrap {
+      grid-template-columns: 1fr;
+      height: auto;
+      overflow: visible;
+    }
+    .blog-left {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .blog-right { min-height: 60vh; overflow-y: visible; }
+  }
+</style>
+
+<div class="blog-wrap">
+
+  <!-- ── LEFT PANEL ── -->
+  <aside class="blog-left">
+
+    {% assign student_posts  = site.posts | where: "category", "student" %}
+    {% assign faculty_posts  = site.posts | where: "category", "faculty" %}
+    {% assign industry_posts = site.posts | where: "category", "industry" %}
+
+    <div class="left-section">
+      <span class="left-section-label">Resources</span>
+      <a class="panel-link" data-url="{{ '/openowls-sdd-guide' | relative_url }}">OpenOwls SDD Guide</a>
+    </div>
+
+    <div class="left-section">
+      <span class="left-section-label">Student Posts</span>
+      {% if student_posts.size > 0 %}
+        {% for post in student_posts %}
+          <a class="panel-link" data-url="{{ post.url | relative_url }}">{{ post.title }}</a>
+        {% endfor %}
+      {% else %}
+        <span class="panel-empty">No posts yet</span>
+      {% endif %}
+    </div>
+
+    <div class="left-section">
+      <span class="left-section-label">Faculty Posts</span>
+      {% if faculty_posts.size > 0 %}
+        {% for post in faculty_posts %}
+          <a class="panel-link" data-url="{{ post.url | relative_url }}">{{ post.title }}</a>
+        {% endfor %}
+      {% else %}
+        <span class="panel-empty">No posts yet</span>
+      {% endif %}
+    </div>
+
+    <div class="left-section">
+      <span class="left-section-label">Industry &amp; Third Party</span>
+      {% if industry_posts.size > 0 %}
+        {% for post in industry_posts %}
+          <a class="panel-link" data-url="{{ post.url | relative_url }}">{{ post.title }}</a>
+        {% endfor %}
+      {% else %}
+        <span class="panel-empty">No posts yet</span>
+      {% endif %}
+    </div>
+
+  </aside>
+
+  <!-- ── RIGHT PANEL ── -->
+  <div class="blog-right" id="blog-right">
+    <div class="blog-welcome">
+      <div class="owl">🦉</div>
+      <p>Select an article or resource<br>from the panel on the left.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const rightPanel = document.getElementById('blog-right');
+
+  async function loadContent(url, linkEl) {
+    // Mark active link
+    document.querySelectorAll('.panel-link').forEach(l => l.classList.remove('active'));
+    if (linkEl) linkEl.classList.add('active');
+
+    // Loading state
+    rightPanel.innerHTML = '<div class="blog-welcome"><div class="owl" style="opacity:0.15;font-size:3rem;">🦉</div><p>Loading…</p></div>';
+
+    try {
+      const res = await fetch(url);
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+
+      // Inject page-specific <style> blocks once (deduplicated by url)
+      const styleId = 'injected-' + url.replace(/[^a-z0-9]/gi, '-');
+      if (!document.getElementById(styleId)) {
+        doc.querySelectorAll('style').forEach(s => {
+          const tag = document.createElement('style');
+          tag.id = styleId;
+          tag.textContent = s.textContent;
+          document.head.appendChild(tag);
+        });
+      }
+
+      // Grab body content — skip nav, footer, script
+      const nodes = [...doc.body.children].filter(
+        el => !['NAV', 'FOOTER', 'SCRIPT'].includes(el.tagName)
+      );
+
+      rightPanel.innerHTML = '';
+      nodes.forEach(el => rightPanel.appendChild(document.importNode(el, true)));
+      rightPanel.scrollTop = 0;
+
+    } catch (err) {
+      rightPanel.innerHTML =
+        '<div class="blog-welcome"><p>Could not load content.<br>' +
+        '<a href="' + url + '" style="color:var(--gold);">Open page directly →</a></p></div>';
+    }
+  }
+
+  // Wire up all panel links
+  document.querySelectorAll('.panel-link[data-url]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      loadContent(link.dataset.url, link);
+    });
+  });
+
+  // Default: load SDD Guide on page load
+  const defaultLink = document.querySelector('.panel-link[data-url]');
+  if (defaultLink) loadContent(defaultLink.dataset.url, defaultLink);
+</script>

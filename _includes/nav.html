@@ -6,11 +6,9 @@
   <ul class="nav-links" id="nav-links">
     <li><a href="{{ '/#projects' | relative_url }}">Projects</a></li>
     <li><a href="{{ '/#how' | relative_url }}">How It Works</a></li>
-    <li><a href="{{ '/#join' | relative_url }}">Join</a></li>
-    <li><a href="{{ site.github_org }}" target="_blank" rel="noopener">GitHub</a></li>
     <li><a href="{{ '/how-we-begin' | relative_url }}">How We Begin</a></li>
-    <li><a href="{{ '/openowls-sdd-guide' | relative_url }}">SDD Guide</a></li>
-    <li><a href="mailto:{{ site.email }}" class="nav-cta">Email Us</a></li>
+    <li><a href="{{ '/blog' | relative_url }}">Blog/Resources</a></li>
+    <li><a href="{{ '/contact-us' | relative_url }}" class="nav-cta">Contact Us</a></li>
   </ul>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
     <span></span><span></span><span></span>
@@ -19,12 +17,11 @@
 
 <script>
   const hamburger = document.getElementById('nav-hamburger');
-  const navLinks = document.getElementById('nav-links');
+  const navLinks  = document.getElementById('nav-links');
   hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('nav-open');
     hamburger.classList.toggle('nav-hamburger--open');
   });
-  // Close menu when a link is clicked
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       navLinks.classList.remove('nav-open');

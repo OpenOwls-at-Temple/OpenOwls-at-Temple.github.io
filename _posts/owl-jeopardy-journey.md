@@ -4,6 +4,7 @@ author: Student Name
 project: Owl Jeopardy
 project_url: /projects/owl-jeopardy/
 date: 2026-06-01
+category: student
 ---
 
 ## How It Started
