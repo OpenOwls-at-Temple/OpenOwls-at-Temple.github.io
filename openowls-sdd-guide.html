@@ -1,0 +1,517 @@
+---
+layout: default
+title: OpenOwls SDD — Getting Started Guide
+description: The OpenOwls Spec-Driven Development getting started guide — how to use AI coding assistants to build real projects, the OpenOwls way.
+---
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+  /* ── PAGE HERO ── */
+  .sdd-hero {
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--border);
+    padding: 8rem 3rem 5rem;
+    text-align: center;
+  }
+
+  .sdd-hero .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(245,197,24,0.1);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+  }
+
+  .sdd-hero .hero-badge::before { content: "●"; font-size: 0.5rem; }
+
+  .sdd-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 700px;
+    margin: 0 auto 1.25rem;
+  }
+
+  .sdd-hero h1 .accent { color: var(--gold); }
+
+  .sdd-hero .hero-sub {
+    font-size: 1.1rem;
+    color: var(--gray-light);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── PAGE CONTENT ── */
+  .sdd-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem 6rem;
+  }
+
+  .sdd-page section { margin-bottom: 5rem; }
+
+  /* ── SECTION HEADERS ── */
+  .sdd-page h2 {
+    font-size: clamp(1.5rem, 3vw, 1.9rem);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sdd-page h2 .accent { color: var(--gold); }
+
+  .sdd-page h3 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 1.75rem 0 0.5rem;
+  }
+
+  .sdd-page p {
+    color: var(--gray-light);
+    margin-bottom: 0.9rem;
+    line-height: 1.75;
+  }
+
+  /* ── CODE ── */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: #93C5FD;
+    background: rgba(147,197,253,0.08);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* ── FILE TREE ── */
+  .file-tree {
+    background: #0B1120;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 2;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .ft-folder { color: var(--gold); font-weight: 500; }
+  .ft-file   { color: #93C5FD; }
+  .ft-root   { color: #F5C518; font-weight: 600; }
+  .ft-note   { color: #3E5270; font-style: italic; }
+
+  /* ── FILE CARDS ── */
+  .file-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    margin: 1.5rem 0;
+  }
+
+  .file-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.4rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .file-card:hover { border-color: rgba(245,197,24,0.3); transform: translateY(-2px); }
+  .file-card.root-card { border-color: rgba(245,197,24,0.3); }
+
+  .fc-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-bottom: 0.35rem;
+  }
+
+  .fc-audience {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+  }
+
+  .file-card p {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--gray);
+    margin: 0;
+  }
+
+  /* ── STEPS ── */
+  .steps { list-style: none; counter-reset: step; margin: 1.75rem 0; }
+
+  .steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.25rem;
+    align-items: start;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-family: var(--font-display);
+    color: var(--navy);
+    background: var(--gold);
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-body h3 { margin-top: 0.6rem; }
+
+  /* ── PROMPT BOX ── */
+  .prompt-box {
+    background: #0B1120;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .prompt-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .prompt-box p {
+    font-size: 0.875rem;
+    color: var(--gray);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .prompt-box em {
+    color: #93C5FD;
+    font-style: normal;
+  }
+
+  /* ── TIP ── */
+  .tip {
+    background: rgba(245,197,24,0.05);
+    border: 1px solid rgba(245,197,24,0.15);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+    color: var(--gray-light);
+  }
+
+  .tip strong { color: var(--white); }
+
+  /* ── TABLE ── */
+  .sdd-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    font-size: 0.875rem;
+  }
+
+  .sdd-table th {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sdd-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--gray-light);
+    vertical-align: top;
+  }
+
+  .sdd-table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+
+  .badge-faculty { background: rgba(229,62,62,0.15);  color: #FC8181; }
+  .badge-student { background: rgba(96,165,250,0.15);  color: #93C5FD; }
+  .badge-both    { background: rgba(52,211,153,0.15);  color: #6EE7B7; }
+
+  @media (max-width: 640px) {
+    .sdd-hero { padding: 6rem 1.5rem 3.5rem; }
+    .sdd-page { padding: 3rem 1.25rem 4rem; }
+    .file-cards { grid-template-columns: 1fr; }
+    .steps li { grid-template-columns: 44px 1fr; gap: 1rem; }
+  }
+</style>
+
+<!-- HERO -->
+<div class="sdd-hero">
+  <div class="hero-badge">OpenOwls · Spec-Driven Development</div>
+  <h1>Getting Started with<br><span class="accent">OpenOwls SDD</span></h1>
+  <p class="hero-sub">A step-by-step guide to using AI coding assistants to build real projects — the OpenOwls way.</p>
+</div>
+
+<div class="sdd-page">
+
+  <!-- SECTION 1 -->
+  <section>
+    <div class="section-label">Section 01</div>
+    <h2>The <span class="accent">OpenOwls SDD</span> File Structure</h2>
+    <p>Every OpenOwls project follows this layout. The two files at the root level are read first by Claude Code. Everything inside <code>ai_specs/</code> provides the full project context — what to build, how to build it, and how to ship it.</p>
+
+    <div class="file-tree">
+      <div><span class="ft-folder">project-root/</span></div>
+      <div>├── <span class="ft-root">CLAUDE.md</span>         <span class="ft-note">← tells Claude Code to read everything below, in order</span></div>
+      <div>├── <span class="ft-root">progress.md</span>       <span class="ft-note">← living session status, updated after every work session</span></div>
+      <div>└── <span class="ft-folder">ai_specs/</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">overview.md</span>              <span class="ft-note">← project goals, users, tech stack</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">features.md</span>              <span class="ft-note">← Phase 1 / 2 / 3 feature definitions</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">architecture-planning.md</span> <span class="ft-note">← folder structure, design decisions, API</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">domain-knowledge.md</span>      <span class="ft-note">← terminology, business rules, constraints</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">conventions.md</span>           <span class="ft-note">← coding style, git rules, testing requirements</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="ft-file">deployment.md</span>            <span class="ft-note">← hosting, environment variables, deploy steps</span></div>
+    </div>
+
+    <div class="file-cards">
+      <div class="file-card root-card">
+        <div class="fc-name">CLAUDE.md</div>
+        <div class="fc-audience">Root · Claude Code Entry Point</div>
+        <p>Tells Claude Code to read all <code>ai_specs/</code> files in the correct order before doing any work. Also defines global behavior rules.</p>
+      </div>
+      <div class="file-card root-card">
+        <div class="fc-name">progress.md</div>
+        <div class="fc-audience">Root · Session Memory</div>
+        <p>Tracks what is done, in progress, and blocked. Read first every session since Claude Code has no memory between sessions.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/overview.md</div>
+        <div class="fc-audience">Audience: Business Sponsor</div>
+        <p>Project name, problem statement, goals, non-goals, target users, tech stack, and key constraints.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/features.md</div>
+        <div class="fc-audience">Audience: End User / Product Owner</div>
+        <p>All features organized into Phase 1 (MVP), Phase 2 (enhanced), and Phase 3 (AI/advanced), with acceptance criteria.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/architecture-planning.md</div>
+        <div class="fc-audience">Audience: Architect / Engineer</div>
+        <p>Folder structure, design decisions, data models, API endpoints, LLM integration plan, and environment variables.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/domain-knowledge.md</div>
+        <div class="fc-audience">Audience: AI Assistant + Team</div>
+        <p>Domain terminology, business rules, common pitfalls, and external dependencies the AI needs to know upfront.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/conventions.md</div>
+        <div class="fc-audience">Audience: Engineer / AI Assistant</div>
+        <p>Naming conventions, code style, git branch rules, testing requirements, and rules for Claude Code behavior.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/deployment.md</div>
+        <div class="fc-audience">Audience: DevOps / Engineer</div>
+        <p>Hosting platforms, local setup steps, environment variables, CI/CD pipeline, and common deployment issues.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section>
+    <div class="section-label">Section 02</div>
+    <h2>Who <span class="accent">Creates</span> Each File</h2>
+    <p>OpenOwls SDD mirrors real professional software development — different stakeholders own different documents. Faculty seed the high-level vision; students own the technical execution.</p>
+
+    <table class="sdd-table">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Created By</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>overview.md</td>
+          <td><span class="badge badge-faculty">Faculty</span></td>
+          <td>Sets project scope and ensures feasibility before students begin</td>
+        </tr>
+        <tr>
+          <td>features.md</td>
+          <td><span class="badge badge-both">Faculty + Students</span></td>
+          <td>Faculty defines Phase 1 (MVP). Students define Phase 2 and Phase 3 after Phase 1 ships.</td>
+        </tr>
+        <tr>
+          <td>architecture-planning.md</td>
+          <td><span class="badge badge-student">Students</span></td>
+          <td>Core technical learning exercise — students make and justify design decisions</td>
+        </tr>
+        <tr>
+          <td>domain-knowledge.md</td>
+          <td><span class="badge badge-both">Faculty + Students</span></td>
+          <td>Faculty seeds domain concepts. Students research and expand throughout the project.</td>
+        </tr>
+        <tr>
+          <td>conventions.md</td>
+          <td><span class="badge badge-faculty">Faculty</span></td>
+          <td>Provided as a template to ensure consistency across all student projects</td>
+        </tr>
+        <tr>
+          <td>deployment.md</td>
+          <td><span class="badge badge-student">Students</span></td>
+          <td>Students choose hosting platforms and document the full deployment process</td>
+        </tr>
+        <tr>
+          <td>progress.md</td>
+          <td><span class="badge badge-student">Students</span></td>
+          <td>Updated at the end of every work session throughout the project lifecycle</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section>
+    <div class="section-label">Section 03</div>
+    <h2>The <span class="accent">Four-Step</span> Workflow</h2>
+    <p>Every project follows the same ritual. Claude.ai handles planning. Claude Code handles building. The <code>ai_specs/</code> files are the handoff contract between the two.</p>
+
+    <ol class="steps">
+      <li>
+        <div class="step-body">
+          <h3>Project Initialization — Claude.ai</h3>
+          <p>Upload the OpenOwls SDD template files to Claude.ai and describe your project idea. Claude.ai generates a complete, filled-in set of <code>ai_specs/</code> files tailored to your project. Faculty reviews <code>overview.md</code> and <code>features.md</code> before handing off to students.</p>
+          <div class="prompt-box">
+            <div class="prompt-label">Example prompt to Claude.ai</div>
+            <p>"These are my OpenOwls SDD template files. I want to build <em>[describe your project]</em>. The target users are <em>[describe users]</em>. Please generate a complete filled-in set of <code>ai_specs/</code> files following the same structure as the templates."</p>
+          </div>
+          <div class="tip"><strong>Tip:</strong> Generate one file at a time. Ask Claude to produce <code>overview.md</code> first, review it, then move to <code>features.md</code>. This gives you more control over the output.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <h3>Faculty Review</h3>
+          <p>Before students touch any code, faculty reviews <code>overview.md</code> and <code>features.md</code> to confirm the project is well-scoped, Phase 1 is a realistic MVP, and the tech stack is appropriate.</p>
+          <div class="tip"><strong>Key question:</strong> Can a team of students realistically complete Phase 1 in two weeks? If not, move features to Phase 2.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <h3>Students Complete the Specs</h3>
+          <p>Students take ownership of <code>architecture-planning.md</code> and <code>deployment.md</code>, making real technical decisions about how to build and ship the project. They expand <code>domain-knowledge.md</code> as they learn the problem space. All files are checked into the GitHub repository.</p>
+          <div class="tip"><strong>This step is the learning.</strong> Students who skip or rush the spec files will struggle during implementation. The planning process is not overhead — it is the work.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <h3>Implementation — Claude Code</h3>
+          <p>With the <code>ai_specs/</code> files complete, students open Claude Code in the project repository. Claude Code reads <code>CLAUDE.md</code> automatically and loads all spec files. Students work phase by phase, updating <code>progress.md</code> at the end of every session.</p>
+          <div class="prompt-box">
+            <div class="prompt-label">Example Claude Code session opener</div>
+            <p>"Read all files in <code>ai_specs/</code> and <code>progress.md</code>. We are currently in <em>Phase 1</em>. The next task is <em>[task from progress.md]</em>. Let's begin."</p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section>
+    <div class="section-label">Section 04</div>
+    <h2>Golden Rules <span class="accent">for Students</span></h2>
+
+    <h3>Always update progress.md after every session</h3>
+    <p>Claude Code has no memory between sessions. If you do not update <code>progress.md</code>, the next session starts blind. Move completed items to done, note what is in progress, and log any blockers.</p>
+
+    <h3>Stay inside the current phase</h3>
+    <p>Do not ask Claude Code to implement Phase 2 features while Phase 1 is incomplete. Phasing exists to keep scope under control and ensure you have a working product at every milestone.</p>
+
+    <h3>Never commit secrets to the repository</h3>
+    <p>API keys and database passwords must never appear in any committed file. Use a <code>.env</code> file locally and add it to <code>.gitignore</code>. The <code>deployment.md</code> file documents which variables are needed — not their values.</p>
+
+    <h3>The spec files are the source of truth</h3>
+    <p>If Claude Code does something unexpected, check whether your spec files are clear enough. Ambiguity in docs leads to wrong assumptions in code. Update the spec file first, then re-run the task.</p>
+
+    <h3>Review before you accept</h3>
+    <p>Claude Code is a collaborator, not an authority. Read every diff before accepting it. If generated code contradicts your <code>conventions.md</code> or <code>architecture-planning.md</code>, say so and ask Claude to correct it.</p>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section>
+    <div class="section-label">Section 05</div>
+    <h2>Understanding the <span class="accent">Three Phases</span></h2>
+    <p>Every OpenOwls project is scoped into three phases. This forces students to define a real MVP before adding complexity — one of the most important skills in professional software development.</p>
+
+    <table class="sdd-table">
+      <thead>
+        <tr><th>Phase</th><th>Goal</th><th>Definition of Done</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Phase 1</td>
+          <td>Core MVP — the smallest useful version of the app</td>
+          <td>A real user can complete the primary workflow end to end</td>
+        </tr>
+        <tr>
+          <td>Phase 2</td>
+          <td>Enhanced features — meaningful value on top of a stable Phase 1</td>
+          <td>Phase 1 is fully tested and deployed before Phase 2 begins</td>
+        </tr>
+        <tr>
+          <td>Phase 3</td>
+          <td>Advanced / AI features — LLM-powered capabilities or stretch goals</td>
+          <td>Phase 2 is stable; AI integration is thoughtful and well-prompted</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip"><strong>Faculty note:</strong> The most common student mistake is a Phase 1 that is too large. A good Phase 1 is one feature, working end-to-end, deployed and usable by a real person. Everything else is Phase 2.</div>
+  </section>
+
+</div>
