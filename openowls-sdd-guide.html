@@ -525,4 +525,84 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
     <div class="tip"><strong>Faculty note:</strong> The most common student mistake is a Phase 1 that is too large. A good Phase 1 is one feature, working end-to-end, deployed and usable by a real person. Everything else is Phase 2.</div>
   </section>
 
+  <!-- SECTION 6 -->
+  <section>
+    <div class="section-label">Section 06</div>
+    <h2>Motivation and <span class="accent">Rationale</span></h2>
+    <p>OpenOwls SDD is a deliberate simplification of industry Spec-Driven Development practices — adapted for a pedagogical context. This section explains the thinking behind the framework and why it is structured the way it is.</p>
+
+    <h3>Each file mirrors a real professional role</h3>
+    <p>The most important design principle behind OpenOwls SDD is that every specification file maps to a real stakeholder in a professional software project. Students are not just filling in templates — they are inhabiting real roles that exist in the industry.</p>
+
+    <table class="sdd-table">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Professional Equivalent</th>
+          <th>What It Teaches</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>overview.md</td>
+          <td>Business sponsor defining the product vision</td>
+          <td>How to articulate a problem worth solving and scope a project realistically</td>
+        </tr>
+        <tr>
+          <td>features.md</td>
+          <td>Product owner translating user conversations into requirements</td>
+          <td>How to write user stories, define acceptance criteria, and control scope with phasing</td>
+        </tr>
+        <tr>
+          <td>architecture-planning.md</td>
+          <td>System architect designing the technical approach</td>
+          <td>How to make and justify design decisions before writing a single line of code</td>
+        </tr>
+        <tr>
+          <td>domain-knowledge.md</td>
+          <td>Domain expert briefing the engineering team</td>
+          <td>How to research a problem space and surface the constraints that shape implementation</td>
+        </tr>
+        <tr>
+          <td>llm-integration.md</td>
+          <td>AI/ML engineer designing the intelligence layer</td>
+          <td>How to think rigorously about prompts, context, evaluation, and failure modes</td>
+        </tr>
+        <tr>
+          <td>conventions.md</td>
+          <td>Engineering lead setting team standards</td>
+          <td>Why consistency matters across a codebase and how to enforce it</td>
+        </tr>
+        <tr>
+          <td>deployment.md</td>
+          <td>DevOps engineer owning the release pipeline</td>
+          <td>That shipping is part of building — deployment is not an afterthought</td>
+        </tr>
+        <tr>
+          <td>progress.md</td>
+          <td>Engineering team's daily standup and sprint tracker</td>
+          <td>How to maintain continuity across sessions and communicate project state clearly</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Why this is a simplification — and why that is intentional</h3>
+    <p>Industry Spec-Driven Development frameworks like GitHub Spec Kit are more granular — they produce per-feature spec files, detailed task breakdowns, and tight CI/CD integration. OpenOwls SDD deliberately consolidates these into fewer, broader files for two reasons.</p>
+    <p>First, cognitive load. A student encountering SDD for the first time should not be overwhelmed by a dozen file types before they have written a line of code. OpenOwls SDD is designed to be learnable in a single onboarding session.</p>
+    <p>Second, audience clarity. Each OpenOwls SDD file has a named human audience — a business sponsor, an end user, a system architect. This stakeholder framing is absent from most industry frameworks, which assume the reader is already an engineer. For students, naming the audience is a teaching device that builds empathy and communication skills alongside technical ones.</p>
+
+    <h3>Why specs before code</h3>
+    <p>The single most common failure mode in student projects is starting to code before the problem is well understood. Features grow unchecked, the architecture becomes inconsistent, and the project collapses under its own complexity before Phase 1 is complete.</p>
+    <p>Writing the <code>ai_specs/</code> files first forces a team to confront hard questions early — what exactly are we building, for whom, and what does done look like? — when the cost of changing course is low. By the time Claude Code opens, the team has already made the decisions that matter most.</p>
+
+    <h3>Why the LLM is a first-class concern</h3>
+    <p>Every OpenOwls project has an LLM layer. This is not incidental — it is the mission. OpenOwls exists to teach students how to build AI-powered tools, not just web applications. The <code>llm-integration.md</code> file exists because prompt design, context management, error handling, and evaluation are engineering disciplines that deserve the same rigor as any other part of the system. Treating the LLM as an afterthought produces brittle, unpredictable applications. Treating it as a first-class component produces ones that work.</p>
+
+    <h3>Relationship to industry SDD</h3>
+    <p>OpenOwls SDD is inspired by, but not identical to, the industry Spec-Driven Development movement. The <code>ai_specs/</code> folder name signals this distinction deliberately — it is the OpenOwls convention, not a direct adoption of GitHub Spec Kit or any other framework. Students who go on to work in industry will encounter those frameworks and find them familiar. The core habits — write specs first, keep them in version control, use them to brief your AI tools — are the same. The structure is simplified for the classroom.</p>
+
+    <h3>Relationship to Computer Science Software Engineering Curriculum</h3>
+    <p>OpenOwls SDD may also serve as a starting point for a broader conversation about how Software Engineering is taught. Traditional CS programs rightly emphasize programming, data structures, and algorithms — the technical foundation every engineer needs. OpenOwls SDD complements that foundation by giving students early exposure to the design phase of software development and to the perspectives of the different stakeholders involved in building a real product. Writing specs before code, thinking like a product owner, an architect, and a domain expert — these are skills that make a stronger, more well-rounded engineer. The framework is modest in scope, but the habits it builds carry well beyond the classroom.</p>
+  </section>
+
 </div>
