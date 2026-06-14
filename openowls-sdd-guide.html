@@ -316,6 +316,7 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">domain-knowledge.md</span>      <span class="ft-note">← terminology, business rules, constraints</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">llm-integration.md</span>       <span class="ft-note">← model choice, prompts, context strategy, guardrails</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">conventions.md</span>           <span class="ft-note">← coding style, git rules, testing requirements</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">auth-security.md</span>         <span class="ft-note">← users, identity, auth, data protection, threats</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="ft-file">deployment.md</span>            <span class="ft-note">← hosting, environment variables, deploy steps</span></div>
     </div>
 
@@ -359,6 +360,11 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
         <div class="fc-name">ai_specs/conventions.md</div>
         <div class="fc-audience">Audience: Engineer / AI Assistant</div>
         <p>Naming conventions, code style, git branch rules, testing requirements, and rules for Claude Code behavior.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/auth-security.md</div>
+        <div class="fc-audience">Audience: Security Engineer</div>
+        <p>User model and scale, identity strategy, authentication, authorization, account lifecycle, data protection, and common threats.</p>
       </div>
       <div class="file-card">
         <div class="fc-name">ai_specs/deployment.md</div>
@@ -412,6 +418,11 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
           <td>conventions.md</td>
           <td><span class="badge badge-faculty">Faculty</span></td>
           <td>Provided as a template to ensure consistency across all student projects</td>
+        </tr>
+        <tr>
+          <td>auth-security.md</td>
+          <td><span class="badge badge-student">Students</span></td>
+          <td>Students decide the user model, identity strategy, and security posture before writing auth code</td>
         </tr>
         <tr>
           <td>deployment.md</td>
@@ -572,6 +583,11 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
           <td>conventions.md</td>
           <td>Engineering lead setting team standards</td>
           <td>Why consistency matters across a codebase and how to enforce it</td>
+        </tr>
+        <tr>
+          <td>auth-security.md</td>
+          <td>Security engineer protecting users and data</td>
+          <td>How to reason about identity, access control, and threats before they become incidents</td>
         </tr>
         <tr>
           <td>deployment.md</td>
