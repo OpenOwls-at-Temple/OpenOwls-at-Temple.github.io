@@ -17,6 +17,5 @@ vendor/
 Thumbs.db
 Desktop.ini
 
-# Add to .gitignore (if not already there)
-echo "_site/" >> .gitignore
-echo ".jekyll-cache/" >> .gitignore
+# macOS
+.DS_Store
