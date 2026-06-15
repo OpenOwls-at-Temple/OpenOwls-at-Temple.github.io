@@ -54,35 +54,6 @@ description: The OpenOwls SDD Suite Edition — applying Spec-Driven Development
     line-height: 1.7;
   }
 
-  /* ── GUIDE SWITCHER ── */
-  .guide-switcher {
-    display: inline-flex;
-    gap: 0.35rem;
-    background: #0B1120;
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 0.3rem;
-    margin: 0 auto 2rem;
-  }
-
-  .guide-switcher a {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--gray-light);
-    text-decoration: none;
-    padding: 0.4rem 1rem;
-    border-radius: 100px;
-    transition: background 0.15s, color 0.15s;
-    white-space: nowrap;
-  }
-
-  .guide-switcher a:hover { color: var(--gold); }
-
-  .guide-switcher a.active {
-    background: var(--gold);
-    color: var(--navy);
-  }
-
   /* ── PAGE CONTENT ── */
   .sdd-page {
     max-width: 900px;
@@ -388,10 +359,6 @@ description: The OpenOwls SDD Suite Edition — applying Spec-Driven Development
   <div class="hero-badge">OpenOwls · SDD Suite Edition</div>
   <h1>Spec-Driven Development for a<br><span class="accent">Multi-Package Monorepo</span></h1>
   <p class="hero-sub">The advanced, two-tier version of OpenOwls SDD — for a suite of stacked libraries that live and build together in one repository.</p>
-  <div class="guide-switcher">
-    <a href="{{ '/openowls-sdd-single-app-guide' | relative_url }}">Single App</a>
-    <a href="{{ '/openowls-sdd-multi-packages-guide' | relative_url }}" class="active">Multi-Package Monorepo</a>
-  </div>
 </div>
 
 <div class="sdd-page">
