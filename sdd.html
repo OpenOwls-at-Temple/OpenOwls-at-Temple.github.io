@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Blog & Resources
-description: Stories from OpenOwls students, faculty, and industry collaborators — plus guides and resources.
+title: SDD Guides
+description: OpenOwls Spec-Driven Development — guides for building real projects with AI coding tools, from a single app to a multi-package monorepo.
 ---
 
 <style>
@@ -115,42 +115,13 @@ description: Stories from OpenOwls students, faculty, and industry collaborators
   <!-- ── LEFT PANEL ── -->
   <aside class="blog-left">
 
-    {% assign student_posts  = site.posts | where: "category", "student" %}
-    {% assign faculty_posts  = site.posts | where: "category", "faculty" %}
-    {% assign industry_posts = site.posts | where: "category", "industry" %}
-
     <div class="left-section">
-      <span class="left-section-label">Student Posts</span>
-      {% if student_posts.size > 0 %}
-        {% for post in student_posts %}
-          <a class="panel-link" data-url="{{ post.url | relative_url }}">{{ post.title }}</a>
-        {% endfor %}
-      {% else %}
-        <span class="panel-empty">No posts yet</span>
-      {% endif %}
+      <span class="left-section-label">Guides</span>
+      <a class="panel-link" data-url="{{ '/openowls-sdd-single-app-guide' | relative_url }}">Single App</a>
+      <a class="panel-link" data-url="{{ '/openowls-sdd-multi-packages-guide' | relative_url }}">Multi-Package Monorepo</a>
     </div>
 
-    <div class="left-section">
-      <span class="left-section-label">Faculty Posts</span>
-      {% if faculty_posts.size > 0 %}
-        {% for post in faculty_posts %}
-          <a class="panel-link" data-url="{{ post.url | relative_url }}">{{ post.title }}</a>
-        {% endfor %}
-      {% else %}
-        <span class="panel-empty">No posts yet</span>
-      {% endif %}
-    </div>
-
-    <div class="left-section">
-      <span class="left-section-label">Industry &amp; Third Party</span>
-      {% if industry_posts.size > 0 %}
-        {% for post in industry_posts %}
-          <a class="panel-link" data-url="{{ post.url | relative_url }}">{{ post.title }}</a>
-        {% endfor %}
-      {% else %}
-        <span class="panel-empty">No posts yet</span>
-      {% endif %}
-    </div>
+    <!-- Future SDD sections (e.g. FAQ) go here as additional .left-section blocks -->
 
   </aside>
 
@@ -158,7 +129,7 @@ description: Stories from OpenOwls students, faculty, and industry collaborators
   <div class="blog-right" id="blog-right">
     <div class="blog-welcome">
       <div class="owl">🦉</div>
-      <p>Select an article or resource<br>from the panel on the left.</p>
+      <p>Select a guide<br>from the panel on the left.</p>
     </div>
   </div>
 
@@ -215,7 +186,7 @@ description: Stories from OpenOwls students, faculty, and industry collaborators
     });
   });
 
-  // Default: load the first item on page load
+  // Default: load the first guide on page load
   const defaultLink = document.querySelector('.panel-link[data-url]');
   if (defaultLink) loadContent(defaultLink.dataset.url, defaultLink);
 </script>
