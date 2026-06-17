@@ -368,34 +368,34 @@ description: The OpenOwls SDD Suite Edition — applying Spec-Driven Development
     <div class="section-label">Section 01</div>
     <h2>What You're <span class="accent">Building</span></h2>
     <p>The original <a href="{{ '/openowls-sdd-single-app-guide' | relative_url }}" style="color:var(--gold);">OpenOwls SDD guide</a> assumes one stand-alone application. This Suite Edition is for the next step up: a <strong>suite of libraries</strong>, not a single app.</p>
-    <p>Several Python packages are <strong>stacked on top of one another</strong> — each depends on the one below. Every package keeps <strong>its own <code>.venv</code> and its own <code>requirements.txt</code></strong>, yet they all work together and live in <strong>one monorepo</strong>. Dependencies point <strong>downward only</strong>.</p>
+    <p>Several Python packages are <strong>stacked on top of one another</strong> — each depends on the one below. Every package keeps <strong>its own <code>.venv</code> and its own <code>requirements.txt</code></strong>, yet they all work together and live in <strong>one monorepo</strong>. Dependencies point <strong>downward only</strong>. Each package is a <strong>top-level folder</strong> at the suite root — there is no wrapping <code>packages/</code> directory.</p>
 
     <div class="layer-stack">
       <div class="layer-box l3">
         <div>
-          <h4>app</h4>
-          <p>User- and model-facing. Talks to people and the LLM. Assembled on top of everything below.</p>
+          <h4>package3</h4>
+          <p>Top layer — user- and model-facing. Talks to people and the LLM. Assembled on top of everything below.</p>
         </div>
         <div class="layer-tag">Layer 3 · Top</div>
       </div>
       <div class="layer-arrow">↓ depends on</div>
       <div class="layer-box l2">
         <div>
-          <h4>middleware</h4>
-          <p>Orchestration layer. Built on <code>core</code>; consumes it only through its public API.</p>
+          <h4>package2</h4>
+          <p>Middle layer — orchestration. Built on <code>package1</code>; consumes it only through its public API.</p>
         </div>
         <div class="layer-tag">Layer 2 · Middle</div>
       </div>
       <div class="layer-arrow">↓ depends on</div>
       <div class="layer-box l1">
         <div>
-          <h4>core</h4>
-          <p>The foundation. Depends on nothing internal. Built and stabilized first.</p>
+          <h4>package1</h4>
+          <p>Base layer — the foundation. Depends on nothing internal. Built and stabilized first.</p>
         </div>
         <div class="layer-tag">Layer 1 · Base</div>
       </div>
     </div>
-    <p class="layer-caption">Illustrative layers — rename <code>core / middleware / app</code> to your real packages and confirm the dependency order.</p>
+    <p class="layer-caption">Generic placeholder names — rename <code>package1 / package2 / package3</code> to your real packages (for example <code>core / middleware / app</code>) and confirm the dependency order.</p>
   </section>
 
   <!-- SECTION 2 -->
@@ -420,7 +420,7 @@ description: The OpenOwls SDD Suite Edition — applying Spec-Driven Development
 
     <div class="file-tree">
       <span class="ft-label">Tier 2 — Private, per package (same shape for every package)</span>
-      <div><span class="ft-folder">packages/core/</span></div>
+      <div><span class="ft-folder">package1/</span>                  <span class="ft-note">← a package — a top-level folder, NOT nested under packages/</span></div>
       <div>├── <span class="ft-root">CLAUDE.md</span>         <span class="ft-note">← package entry: "read ./ai_specs/, inherit root" (loose)</span></div>
       <div>├── <span class="ft-root">progress.md</span>       <span class="ft-note">← this library's session memory (loose)</span></div>
       <div>├── <span class="ft-folder">ai_specs/</span></div>
@@ -428,8 +428,10 @@ description: The OpenOwls SDD Suite Edition — applying Spec-Driven Development
       <div>│&nbsp;&nbsp;&nbsp;├── <span class="ft-file">features.md</span>      <span class="ft-note">← this library's capabilities, phased</span></div>
       <div>│&nbsp;&nbsp;&nbsp;├── <span class="ft-file">architecture.md</span>  <span class="ft-note">← this library's internal design</span></div>
       <div>│&nbsp;&nbsp;&nbsp;└── <span class="ft-file">deployment.md</span>    <span class="ft-note">← how this library is packaged &amp; versioned</span></div>
-      <div>├── <span class="ft-folder">.venv/</span></div>
+      <div>├── <span class="ft-folder">.venv/</span>            <span class="ft-note">← package-owned environment (git-ignored)</span></div>
       <div>└── <span class="ft-file">requirements.txt</span></div>
+      <div><span class="ft-folder">package2/</span>                  <span class="ft-note">← another package — same shape, also a top-level folder</span></div>
+      <div>└── <span class="ft-note">… (add one folder per package: package3, …)</span></div>
     </div>
 
     <div class="tip"><strong>Structural invariant:</strong> <code>CLAUDE.md</code> and the progress files are <strong>operational</strong> and must sit at the folder root — <strong>never inside <code>ai_specs/</code></strong>. Claude Code discovers <code>CLAUDE.md</code> by walking up the directory tree, so it has to live where you work and <em>point into</em> <code>ai_specs/</code>.</div>
@@ -468,7 +470,7 @@ description: The OpenOwls SDD Suite Edition — applying Spec-Driven Development
         <tr>
           <td>llm-integration.md</td>
           <td><span class="badge badge-root">Root</span></td>
-          <td>Shared <strong>policy</strong> (model choice + guardrails). Caveat: if only the top <code>app</code> package calls the model, move prompt specifics into that package.</td>
+          <td>Shared <strong>policy</strong> (model choice + guardrails). Caveat: if only the top package calls the model, move prompt specifics into that package.</td>
         </tr>
         <tr>
           <td>auth-security.md</td>
@@ -522,11 +524,11 @@ description: The OpenOwls SDD Suite Edition — applying Spec-Driven Development
     <p>A nested <code>CLAUDE.md</code> is <strong>not</strong> loaded at launch. It's pulled in the first time Claude Code reads a file in that subtree. This is the focus mechanism — a package's detail arrives only when you're actually working in it.</p>
 
     <h3>Launch inside a package for focus</h3>
-    <p>Running <code>cd packages/core &amp;&amp; claude</code> means Claude Code still inherits the root rules (walk-up), but its attention and on-demand loading center on that one library.</p>
+    <p>Running <code>cd package1 &amp;&amp; claude</code> means Claude Code still inherits the root rules (walk-up), but its attention and on-demand loading center on that one library.</p>
 
     <div class="prompt-box">
       <div class="prompt-label">Example focused session opener</div>
-      <p>"Read <code>./ai_specs/</code> and <code>./progress.md</code> for this package, and follow the root <code>CLAUDE.md</code> conventions. We are in <em>Phase 1</em> of <code>core</code>. The next task is <em>[task from progress.md]</em>. Let's begin."</p>
+      <p>"Read <code>./ai_specs/</code> and <code>./progress.md</code> for this package, and follow the root <code>CLAUDE.md</code> conventions. We are in <em>Phase 1</em> of <code>package1</code>. The next task is <em>[task from progress.md]</em>. Let's begin."</p>
     </div>
 
     <h3>Keep instruction files concise</h3>
@@ -556,25 +558,25 @@ description: The OpenOwls SDD Suite Edition — applying Spec-Driven Development
     <ol class="steps">
       <li>
         <div class="step-body">
-          <h3>core first</h3>
+          <h3>package1 (base) first</h3>
           <p>Build and stabilize the base. Its own tests pass and its public API is settled <em>before</em> anything depends on it. A churning foundation forces rework in every layer above.</p>
         </div>
       </li>
       <li>
         <div class="step-body">
-          <h3>middleware next</h3>
-          <p>Only once <code>core</code> is stable. Consume <code>core</code> through its public API — never reach around it into internals.</p>
+          <h3>package2 (middle) next</h3>
+          <p>Only once <code>package1</code> is stable. Consume <code>package1</code> through its public API — never reach around it into internals.</p>
         </div>
       </li>
       <li>
         <div class="step-body">
-          <h3>app last</h3>
+          <h3>package3 (top) last</h3>
           <p>The user- and model-facing layer, assembled on a foundation that already works end-to-end.</p>
         </div>
       </li>
     </ol>
 
-    <div class="tip"><strong>Within each library,</strong> a real Phase 1 is the smallest version that works end-to-end; everything else is Phase 2. The most common mistake is starting <code>app</code> because it's exciting while <code>core</code> is still churning.</div>
+    <div class="tip"><strong>Within each library,</strong> a real Phase 1 is the smallest version that works end-to-end; everything else is Phase 2. The most common mistake is starting the top package because it's exciting while the base (<code>package1</code>) is still churning.</div>
   </section>
 
   <!-- SECTION 7 -->
