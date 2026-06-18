@@ -233,6 +233,7 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
   }
 
   .tip strong { color: var(--white); }
+  .tip a { color: var(--gold); }
 
   /* ── TABLE ── */
   .sdd-table {
@@ -653,6 +654,14 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
         <p style="margin-top:0.75rem;"><a href="https://github.com/github/spec-kit" target="_blank" rel="noopener" style="color:#93C5FD;font-size:0.82rem;">github.com/github/spec-kit →</a></p>
       </div>
     </div>
+  </section>
+
+  <!-- CROSS-REFERENCE -->
+  <section>
+    <div class="section-label">Related</div>
+    <h2>Building a <span class="accent">Suite of Libraries?</span></h2>
+    <p>If your project is not one stand-alone app but a stacked suite of packages that depend on one another and build together in a single repository, step up to the advanced framework. It uses a two-tier spec structure — shared specs at the root, private specs inside each package — and a bottom-up build order.</p>
+    <div class="tip">→ <a href="{{ '/openowls-sdd-multi-packages-guide' | relative_url }}"><strong>OpenOwls SDD — Suite Edition (Multi-Package Monorepo)</strong></a></div>
   </section>
 
 </div>
