@@ -1,0 +1,418 @@
+---
+layout: default
+title: The OpenOwls Pledge
+description: The Owls Helping Owls pledge for OpenOwls student members at Temple University.
+---
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  /* Page-scoped tokens — kept off :root so they don't override the
+     shared nav/footer which rely on the site's global variables. */
+  .pledge-page {
+    --navy:      #0B1120;
+    --navy-mid:  #111827;
+    --navy-card: #1a2235;
+    --cherry:    #E53E3E;
+    --gold:      #D4A843;
+    --gold-pale: rgba(212,168,67,0.08);
+    --border:    #1E2D45;
+    --text-body: #CBD5E1;
+    --text-head: #F1F5F9;
+    --muted:     #94A3B8;
+
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--text-body);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .pledge-page *, .pledge-page *::before, .pledge-page *::after { box-sizing: border-box; }
+
+  /* ── HERO ── */
+  .pledge-page .hero {
+    display: block;             /* override main.css .hero { display:flex } */
+    min-height: 0;              /* override main.css .hero { min-height:100vh } */
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--border);
+    padding: 120px 48px 72px;   /* extra top padding clears the fixed site nav */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pledge-page .hero::before {
+    content: '🦉';
+    position: absolute;
+    font-size: 240px;
+    opacity: 0.03;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .pledge-page .eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cherry);
+    background: rgba(229,62,62,0.1);
+    border: 1px solid rgba(229,62,62,0.25);
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+
+  .pledge-page .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 auto 16px;
+    max-width: 700px;
+  }
+
+  .pledge-page .hero h1 em { color: var(--gold); font-style: italic; }
+
+  .pledge-page .hero-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--muted);
+    margin: 0 auto;
+    max-width: 480px;
+  }
+
+  .pledge-page .hero-quote cite {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 10px;
+  }
+
+  /* ── PAGE ── */
+  .pledge-page .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 72px 32px 96px;
+  }
+
+  /* ── INTRO ── */
+  .pledge-page .intro {
+    text-align: center;
+    font-size: 16px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 64px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.8;
+  }
+
+  /* ── PLEDGE SECTIONS ── */
+  .pledge-page .pledge-section { margin-bottom: 56px; }
+
+  .pledge-page .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .pledge-page .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-head);
+    letter-spacing: -0.01em;
+  }
+
+  .pledge-page .section-header h2 span { color: var(--gold); }
+
+  .pledge-page .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* I Believe cards */
+  .pledge-page .belief-cards { display: flex; flex-direction: column; gap: 14px; }
+
+  .pledge-page .belief-card {
+    background: var(--navy-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    padding: 20px 24px;
+    font-size: 15px;
+    color: var(--text-body);
+    line-height: 1.7;
+    transition: border-color 0.2s;
+  }
+
+  .pledge-page .belief-card:hover { border-left-color: var(--cherry); }
+
+  /* I Commit cards */
+  .pledge-page .commit-cards { display: flex; flex-direction: column; gap: 14px; }
+
+  .pledge-page .commit-card {
+    background: var(--navy-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 26px;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .pledge-page .commit-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cherry);
+    padding-top: 3px;
+    line-height: 1.4;
+  }
+
+  .pledge-page .commit-text {
+    font-size: 15px;
+    color: var(--text-body);
+    line-height: 1.7;
+  }
+
+  /* I Understand */
+  .pledge-page .understand-block {
+    background: var(--gold-pale);
+    border: 1px solid rgba(212,168,67,0.2);
+    border-radius: 12px;
+    padding: 28px 32px;
+  }
+
+  .pledge-page .understand-block p {
+    font-size: 15px;
+    color: var(--text-body);
+    line-height: 1.9;
+    margin: 0;
+  }
+
+  .pledge-page .understand-block p span {
+    display: block;
+    padding: 4px 0;
+  }
+
+  .pledge-page .understand-block .qday {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  /* ── DIVIDER ── */
+  .pledge-page .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 56px 0;
+  }
+
+  /* ── SIGNATURE ── */
+  .pledge-page .signature-area {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .pledge-page .sig-tag {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+
+  .pledge-page .sig-fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .pledge-page .sig-field {
+    border-bottom: 1px solid #2E4060;
+    padding-bottom: 10px;
+  }
+
+  .pledge-page .sig-owl {
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+
+  .pledge-page .sig-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #334155;
+    font-weight: 500;
+  }
+
+  /* I Also Pledge — keyword emphasis */
+  .pledge-page .also-pledge strong { color: var(--text-head); }
+  .pledge-page .also-pledge em {
+    color: var(--gold);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* ── POSTER LINK ── */
+  .pledge-page .poster-link {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .pledge-page .poster-link a {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid rgba(212,168,67,0.3);
+    border-radius: 999px;
+    padding: 10px 22px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .pledge-page .poster-link a:hover {
+    border-color: var(--cherry);
+    color: var(--cherry);
+  }
+
+  @media (max-width: 640px) {
+    .pledge-page .hero { padding: 96px 24px 48px; }
+    .pledge-page .page { padding: 48px 20px 64px; }
+    .pledge-page .commit-card { grid-template-columns: 1fr; gap: 6px; }
+  }
+</style>
+
+<div class="pledge-page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">OpenOwls · Member Pledge</div>
+    <h1>Owls <em>Helping</em> Owls</h1>
+    <div class="hero-quote">
+      "A single owl sees far. A parliament of owls sees everything."
+      <cite>— Professor X-Owl</cite>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <!-- Intro -->
+    <div class="intro">
+      By joining OpenOwls, I accept the following pledge — not as a rule imposed upon me,
+      but as a commitment I make freely to my fellow Owls.
+    </div>
+
+    <!-- I BELIEVE -->
+    <div class="pledge-section">
+      <div class="section-header">
+        <h2>I <span>Believe</span></h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="belief-cards">
+        <div class="belief-card">
+          I believe that AI is not a shortcut. It is a tool — and like all tools, its value depends entirely on the intention and skill of the person holding it.
+        </div>
+        <div class="belief-card">
+          I believe that what we build here matters — not because it is assigned, but because real people will use it.
+        </div>
+      </div>
+    </div>
+
+    <!-- I COMMIT -->
+    <div class="pledge-section">
+      <div class="section-header">
+        <h2>I <span>Commit</span></h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="commit-cards">
+        <div class="commit-card">
+          <div class="commit-label">To my fellow Owls</div>
+          <div class="commit-text">I will share what I know without hesitation. When a teammate is stuck, I will stop and help — not because it is required, but because their success is part of mine.</div>
+        </div>
+        <div class="commit-card">
+          <div class="commit-label">To the work</div>
+          <div class="commit-text">I will not ship code I do not understand. I will spec before I build, review before I merge, and test before I claim it is done.</div>
+        </div>
+        <div class="commit-card">
+          <div class="commit-label">To the community</div>
+          <div class="commit-text">I will contribute to OpenOwls openly. What I learn here, I will pass forward to the Owls who come after me.</div>
+        </div>
+        <div class="commit-card">
+          <div class="commit-label">To Professor X-Owl's mission</div>
+          <div class="commit-text">I will use AI tools with intention — to learn faster, build better, and close the gap between what I study and what the world needs.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- I UNDERSTAND -->
+    <div class="pledge-section">
+      <div class="section-header">
+        <h2>I <span>Understand</span></h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="understand-block">
+        <p>
+          <span>That membership in OpenOwls is a privilege, not a right.</span>
+          <span>That the group is only as strong as the trust we keep with each other.</span>
+          <span class="qday">That one day, when Q-Day arrives and Professor X-Owl reveals himself, I want to be someone he is proud to have guided.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- I ALSO PLEDGE -->
+    <div class="pledge-section">
+      <div class="section-header">
+        <h2>I Also <span>Pledge</span></h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="understand-block also-pledge">
+        <p>
+          <span><strong>Owls Helping Owls.</strong> Beyond my time as a student, I commit to carry this pledge forward as a Temple Owl — to <em>mentor</em> those who come after me, <em>share</em> what I know, <em>stay connected</em>, <em>champion</em> fellow Owls, <em>represent</em> Temple's values, and <em>give back</em> in whatever way I can.</span>
+        </p>
+        <div class="poster-link">
+          <a href="{{ '/owls-helping-owls-poster.html' | relative_url }}">Read the full Owls Helping Owls pledge →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SIGNATURE -->
+    <div class="signature-area">
+      <div class="sig-tag">Signed with a wing and a hoot.</div>
+      <div class="sig-fields">
+        <div class="sig-field">
+          <div class="sig-owl">🦉</div>
+          <div class="sig-label">Your Name · Temple University</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

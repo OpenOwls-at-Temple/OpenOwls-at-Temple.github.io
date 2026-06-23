@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Owls Helping Owls — Temple CIS Alumni Pledge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #E8E0D0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .poster {
+      width: 680px;
+      background: #F5F0E8;
+      border: 2px solid #9D2235;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── CORNER ACCENTS ── */
+    .corner {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border-color: #9D2235;
+      border-style: solid;
+      z-index: 10;
+    }
+    .corner-tl { top: 8px; left: 8px; border-width: 3px 0 0 3px; }
+    .corner-tr { top: 8px; right: 8px; border-width: 3px 3px 0 0; }
+    .corner-bl { bottom: 8px; left: 8px; border-width: 0 0 3px 3px; }
+    .corner-br { bottom: 8px; right: 8px; border-width: 0 3px 3px 0; }
+
+    /* ── TOP SECTION — ILLUSTRATION AREA ── */
+    .illustration-area {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      background: #F5F0E8;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Campus map background */
+    .map-bg {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      opacity: 0.12;
+    }
+
+    /* Binary code margin decorations */
+    .binary-left {
+      position: absolute;
+      left: 12px;
+      top: 20px;
+      font-family: monospace;
+      font-size: 10px;
+      color: #9D2235;
+      opacity: 0.4;
+      line-height: 1.8;
+      letter-spacing: 0.1em;
+    }
+
+    .binary-right {
+      position: absolute;
+      right: 12px;
+      top: 20px;
+      font-family: monospace;
+      font-size: 10px;
+      color: #9D2235;
+      opacity: 0.4;
+      line-height: 1.8;
+      letter-spacing: 0.1em;
+      text-align: right;
+    }
+
+    /* Code snippets */
+    .code-snippet {
+      position: absolute;
+      font-family: monospace;
+      font-size: 9px;
+      color: #9D2235;
+      opacity: 0.3;
+      line-height: 1.6;
+    }
+
+    .code-left { left: 48px; top: 80px; }
+    .code-right { right: 48px; bottom: 80px; }
+
+    /* Title overlay */
+    .poster-title {
+      position: absolute;
+      top: 24px;
+      left: 0; right: 0;
+      text-align: center;
+      z-index: 5;
+    }
+
+    .poster-title h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 900;
+      color: #1A0A0F;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .poster-title h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 900;
+      color: #9D2235;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    /* Owl SVGs */
+    .owl-left {
+      position: absolute;
+      bottom: 0px;
+      left: 40px;
+      z-index: 4;
+    }
+
+    .owl-right {
+      position: absolute;
+      bottom: 0px;
+      right: 40px;
+      z-index: 4;
+    }
+
+    /* Neural network */
+    .neural-net {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      opacity: 0.5;
+    }
+
+    /* Bell tower */
+    .building-left {
+      position: absolute;
+      bottom: 0;
+      left: 200px;
+      z-index: 2;
+      opacity: 0.35;
+    }
+
+    .building-right {
+      position: absolute;
+      bottom: 0;
+      right: 200px;
+      z-index: 2;
+      opacity: 0.35;
+    }
+
+    /* Laurel wreaths */
+    .laurel-left {
+      position: absolute;
+      bottom: 8px;
+      left: 40px;
+      z-index: 6;
+      opacity: 0.6;
+    }
+
+    .laurel-right {
+      position: absolute;
+      bottom: 8px;
+      right: 40px;
+      z-index: 6;
+      opacity: 0.6;
+      transform: scaleX(-1);
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #9D2235 20%, #9D2235 80%, transparent);
+    }
+
+    /* ── PLEDGE CARD ── */
+    .pledge-card {
+      background: #FFFFFF;
+      margin: 20px 24px;
+      border-radius: 8px;
+      padding: 28px 32px 24px;
+      box-shadow: 0 2px 12px rgba(157,34,53,0.08);
+      border: 1px solid rgba(157,34,53,0.12);
+      position: relative;
+      z-index: 5;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #1A0A0F;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .card-intro {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+      text-align: center;
+      margin-bottom: 20px;
+      font-style: italic;
+      border-bottom: 1px solid #F0E8E0;
+      padding-bottom: 16px;
+    }
+
+    .pledge-list { list-style: none; margin-bottom: 20px; }
+
+    .pledge-list li {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #F5F0E8;
+      align-items: start;
+    }
+
+    .pledge-list li:last-child { border-bottom: none; }
+
+    .pledge-keyword {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #9D2235;
+      padding-top: 2px;
+    }
+
+    .pledge-desc {
+      font-size: 13px;
+      color: #444;
+      line-height: 1.55;
+    }
+
+    .closing-text {
+      font-size: 12px;
+      color: #666;
+      font-style: italic;
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      padding: 12px 0;
+      border-top: 1px solid #F0E8E0;
+    }
+
+    .closing-text strong { color: #9D2235; font-style: normal; }
+
+    /* Signature */
+    .sig-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 4px;
+    }
+
+    .sig-field {
+      border-top: 1px solid #CCC;
+      padding-top: 8px;
+    }
+
+    .sig-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #999;
+      font-weight: 600;
+    }
+
+    /* ── FOOTER ── */
+    .poster-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 32px 20px;
+      border-top: 1px solid rgba(157,34,53,0.15);
+    }
+
+    .footer-left {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9D2235;
+    }
+
+    .footer-right {
+      font-size: 11px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-owl {
+      width: 28px;
+      height: 28px;
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .poster { border: none; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="poster">
+
+  <!-- Corner accents -->
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <!-- ── ILLUSTRATION AREA ── -->
+  <div class="illustration-area">
+
+    <!-- Campus map SVG background -->
+    <svg class="map-bg" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
+      <!-- Grid streets -->
+      <line x1="0" y1="100" x2="680" y2="100" stroke="#9D2235" stroke-width="1.5"/>
+      <line x1="0" y1="200" x2="680" y2="200" stroke="#9D2235" stroke-width="1.5"/>
+      <line x1="0" y1="300" x2="680" y2="300" stroke="#9D2235" stroke-width="1.5"/>
+      <line x1="120" y1="0" x2="120" y2="420" stroke="#9D2235" stroke-width="1.5"/>
+      <line x1="240" y1="0" x2="240" y2="420" stroke="#9D2235" stroke-width="1.5"/>
+      <line x1="360" y1="0" x2="360" y2="420" stroke="#9D2235" stroke-width="1.5"/>
+      <line x1="480" y1="0" x2="480" y2="420" stroke="#9D2235" stroke-width="1.5"/>
+      <line x1="600" y1="0" x2="600" y2="420" stroke="#9D2235" stroke-width="1.5"/>
+      <!-- Diagonal paths -->
+      <line x1="0" y1="420" x2="680" y2="0" stroke="#9D2235" stroke-width="0.8" stroke-dasharray="4,6"/>
+      <line x1="0" y1="0" x2="680" y2="420" stroke="#9D2235" stroke-width="0.8" stroke-dasharray="4,6"/>
+      <!-- Campus blocks -->
+      <rect x="130" y="110" width="100" height="80" fill="#9D2235" opacity="0.15" rx="2"/>
+      <rect x="260" y="110" width="90" height="80" fill="#9D2235" opacity="0.15" rx="2"/>
+      <rect x="380" y="110" width="90" height="80" fill="#9D2235" opacity="0.15" rx="2"/>
+      <rect x="130" y="210" width="100" height="80" fill="#9D2235" opacity="0.1" rx="2"/>
+      <rect x="260" y="210" width="90" height="80" fill="#9D2235" opacity="0.2" rx="2"/>
+      <rect x="380" y="210" width="90" height="80" fill="#9D2235" opacity="0.1" rx="2"/>
+      <!-- Location pins -->
+      <circle cx="180" cy="150" r="5" fill="#9D2235" opacity="0.5"/>
+      <circle cx="305" cy="150" r="5" fill="#9D2235" opacity="0.5"/>
+      <circle cx="425" cy="150" r="5" fill="#9D2235" opacity="0.5"/>
+      <circle cx="305" cy="250" r="7" fill="#9D2235" opacity="0.7"/>
+    </svg>
+
+    <!-- Binary left margin -->
+    <div class="binary-left">
+      1 0 1 1<br>0 1 0 0<br>1 1 0 1<br>0 0 1 0<br>1 0 1 1<br>0 1 1 0<br>1 0 0 1<br>0 1 0 1<br>1 1 0 0<br>0 0 1 1
+    </div>
+
+    <!-- Binary right margin -->
+    <div class="binary-right">
+      0 1 1 0<br>1 0 0 1<br>0 1 1 1<br>1 0 1 0<br>0 1 0 0<br>1 1 0 1<br>0 0 1 0<br>1 0 1 1<br>0 1 0 1<br>1 1 0 0
+    </div>
+
+    <!-- Code snippets -->
+    <div class="code-snippet code-left">
+      &lt;title&gt;<br>
+      &lt;meta name="pledge"&gt;<br>
+      &lt;html&gt;<br>
+      &lt;body&gt;
+    </div>
+    <div class="code-snippet code-right">
+      &lt;/div&gt;<br>
+      computer_science<br>
+      _laboratory;<br>
+      &lt;/nd&gt;
+    </div>
+
+    <!-- Title -->
+    <div class="poster-title">
+      <h1>Owls Helping Owls</h1>
+      <h2>The Pledge</h2>
+    </div>
+
+    <!-- Bell Tower (left building) -->
+    <svg class="building-left" width="80" height="120" viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="60" width="60" height="60" fill="#9D2235"/>
+      <rect x="20" y="40" width="40" height="30" fill="#9D2235"/>
+      <rect x="30" y="20" width="20" height="30" fill="#9D2235"/>
+      <polygon points="40,0 30,20 50,20" fill="#9D2235"/>
+      <rect x="15" y="70" width="12" height="15" fill="#F5F0E8" opacity="0.4"/>
+      <rect x="35" y="70" width="12" height="15" fill="#F5F0E8" opacity="0.4"/>
+      <rect x="55" y="70" width="12" height="15" fill="#F5F0E8" opacity="0.4"/>
+      <circle cx="40" cy="32" r="5" fill="#F5F0E8" opacity="0.5"/>
+    </svg>
+
+    <!-- CS Lab building (right) -->
+    <svg class="building-right" width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="30" width="100" height="70" fill="#9D2235"/>
+      <rect x="10" y="45" width="18" height="18" fill="#F5F0E8" opacity="0.35"/>
+      <rect x="40" y="45" width="18" height="18" fill="#F5F0E8" opacity="0.35"/>
+      <rect x="70" y="45" width="18" height="18" fill="#F5F0E8" opacity="0.35"/>
+      <rect x="10" y="72" width="18" height="18" fill="#F5F0E8" opacity="0.35"/>
+      <rect x="40" y="72" width="18" height="18" fill="#F5F0E8" opacity="0.35"/>
+      <rect x="70" y="72" width="18" height="18" fill="#F5F0E8" opacity="0.35"/>
+      <rect x="35" y="0" width="30" height="35" fill="#9D2235"/>
+      <rect x="40" y="8" width="20" height="16" fill="#F5F0E8" opacity="0.3"/>
+    </svg>
+
+    <!-- Neural network center -->
+    <svg class="neural-net" width="120" height="90" viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Connections -->
+      <line x1="20" y1="20" x2="60" y2="45" stroke="#9D2235" stroke-width="1.5" opacity="0.7"/>
+      <line x1="20" y1="70" x2="60" y2="45" stroke="#9D2235" stroke-width="1.5" opacity="0.7"/>
+      <line x1="60" y1="45" x2="100" y2="20" stroke="#9D2235" stroke-width="1.5" opacity="0.7"/>
+      <line x1="60" y1="45" x2="100" y2="70" stroke="#9D2235" stroke-width="1.5" opacity="0.7"/>
+      <line x1="20" y1="20" x2="100" y2="20" stroke="#9D2235" stroke-width="1" opacity="0.4"/>
+      <line x1="20" y1="70" x2="100" y2="70" stroke="#9D2235" stroke-width="1" opacity="0.4"/>
+      <!-- Nodes -->
+      <circle cx="20" cy="20" r="7" fill="#9D2235"/>
+      <circle cx="20" cy="70" r="7" fill="#9D2235"/>
+      <circle cx="60" cy="45" r="10" fill="#9D2235"/>
+      <circle cx="100" cy="20" r="7" fill="#9D2235"/>
+      <circle cx="100" cy="70" r="7" fill="#9D2235"/>
+      <!-- Glow dots -->
+      <circle cx="20" cy="20" r="3" fill="#F5F0E8" opacity="0.6"/>
+      <circle cx="20" cy="70" r="3" fill="#F5F0E8" opacity="0.6"/>
+      <circle cx="60" cy="45" r="4" fill="#F5F0E8" opacity="0.6"/>
+      <circle cx="100" cy="20" r="3" fill="#F5F0E8" opacity="0.6"/>
+      <circle cx="100" cy="70" r="3" fill="#F5F0E8" opacity="0.6"/>
+    </svg>
+
+    <!-- Academic Owl (left) -->
+    <svg class="owl-left" width="170" height="200" viewBox="0 0 170 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Graduation cap -->
+      <rect x="35" y="18" width="80" height="8" fill="#1A0A0F" rx="1"/>
+      <polygon points="75,4 35,22 115,22" fill="#1A0A0F"/>
+      <line x1="115" y1="18" x2="122" y2="34" stroke="#9D2235" stroke-width="2.5"/>
+      <circle cx="124" cy="36" r="4" fill="#9D2235"/>
+      <!-- Body -->
+      <ellipse cx="75" cy="130" rx="42" ry="54" fill="#7A1A24"/>
+      <!-- Head -->
+      <circle cx="75" cy="68" r="36" fill="#7A1A24"/>
+      <!-- Ear tufts -->
+      <polygon points="56,36 50,20 66,34" fill="#5A1018"/>
+      <polygon points="94,36 100,20 84,34" fill="#5A1018"/>
+      <!-- Chest feathers -->
+      <ellipse cx="75" cy="110" rx="26" ry="32" fill="#F5F0E8" opacity="0.25"/>
+      <!-- Eyes -->
+      <circle cx="62" cy="65" r="13" fill="#F5F0E8"/>
+      <circle cx="88" cy="65" r="13" fill="#F5F0E8"/>
+      <circle cx="62" cy="65" r="9" fill="#9D2235"/>
+      <circle cx="88" cy="65" r="9" fill="#9D2235"/>
+      <circle cx="62" cy="65" r="5" fill="#1A0A0F"/>
+      <circle cx="88" cy="65" r="5" fill="#1A0A0F"/>
+      <circle cx="60" cy="63" r="2" fill="white" opacity="0.8"/>
+      <circle cx="86" cy="63" r="2" fill="white" opacity="0.8"/>
+      <!-- Beak -->
+      <polygon points="75,76 68,86 82,86" fill="#D4A843"/>
+      <!-- Wings -->
+      <ellipse cx="33" cy="138" rx="18" ry="30" fill="#5A1018" transform="rotate(-12 33 138)"/>
+      <ellipse cx="117" cy="138" rx="18" ry="30" fill="#5A1018" transform="rotate(12 117 138)"/>
+      <!-- Feet -->
+      <line x1="62" y1="182" x2="54" y2="196" stroke="#D4A843" stroke-width="3"/>
+      <line x1="62" y1="182" x2="62" y2="197" stroke="#D4A843" stroke-width="3"/>
+      <line x1="62" y1="182" x2="70" y2="196" stroke="#D4A843" stroke-width="3"/>
+      <line x1="88" y1="182" x2="80" y2="196" stroke="#D4A843" stroke-width="3"/>
+      <line x1="88" y1="182" x2="88" y2="197" stroke="#D4A843" stroke-width="3"/>
+      <line x1="88" y1="182" x2="96" y2="196" stroke="#D4A843" stroke-width="3"/>
+      <!-- Diploma -->
+      <rect x="100" y="118" width="36" height="26" rx="3" fill="#F5F0E8" transform="rotate(-20 100 118)"/>
+      <line x1="106" y1="124" x2="126" y2="118" stroke="#9D2235" stroke-width="1.5" opacity="0.6"/>
+      <line x1="108" y1="130" x2="128" y2="124" stroke="#9D2235" stroke-width="1.5" opacity="0.6"/>
+      <!-- Book under owl -->
+      <rect x="28" y="188" width="94" height="12" rx="2" fill="#9D2235"/>
+      <rect x="32" y="184" width="86" height="8" rx="1" fill="#7A1A24"/>
+    </svg>
+
+    <!-- Tech Owl (right) -->
+    <svg class="owl-right" width="170" height="200" viewBox="0 0 170 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Body -->
+      <ellipse cx="95" cy="130" rx="42" ry="54" fill="#5A1018"/>
+      <!-- Circuit patterns on body -->
+      <line x1="75" y1="110" x2="115" y2="110" stroke="#9D2235" stroke-width="1" opacity="0.5"/>
+      <line x1="95" y1="100" x2="95" y2="155" stroke="#9D2235" stroke-width="1" opacity="0.5"/>
+      <circle cx="75" cy="110" r="3" fill="#9D2235" opacity="0.6"/>
+      <circle cx="115" cy="110" r="3" fill="#9D2235" opacity="0.6"/>
+      <circle cx="95" cy="130" r="4" fill="#9D2235" opacity="0.6"/>
+      <!-- Head -->
+      <circle cx="95" cy="68" r="36" fill="#5A1018"/>
+      <!-- Ear tufts -->
+      <polygon points="76,36 70,20 86,34" fill="#3A0A10"/>
+      <polygon points="114,36 120,20 104,34" fill="#3A0A10"/>
+      <!-- Circuit on head -->
+      <line x1="70" y1="55" x2="80" y2="55" stroke="#9D2235" stroke-width="1" opacity="0.4"/>
+      <line x1="110" y1="55" x2="120" y2="55" stroke="#9D2235" stroke-width="1" opacity="0.4"/>
+      <!-- Eyes -->
+      <circle cx="82" cy="65" r="13" fill="#F5F0E8"/>
+      <circle cx="108" cy="65" r="13" fill="#F5F0E8"/>
+      <circle cx="82" cy="65" r="9" fill="#9D2235"/>
+      <circle cx="108" cy="65" r="9" fill="#9D2235"/>
+      <circle cx="82" cy="65" r="5" fill="#1A0A0F"/>
+      <circle cx="108" cy="65" r="5" fill="#1A0A0F"/>
+      <circle cx="80" cy="63" r="2" fill="white" opacity="0.8"/>
+      <circle cx="106" cy="63" r="2" fill="white" opacity="0.8"/>
+      <!-- Beak -->
+      <polygon points="95,76 88,86 102,86" fill="#D4A843"/>
+      <!-- Wings -->
+      <ellipse cx="53" cy="138" rx="18" ry="30" fill="#3A0A10" transform="rotate(-12 53 138)"/>
+      <ellipse cx="137" cy="138" rx="18" ry="30" fill="#3A0A10" transform="rotate(12 137 138)"/>
+      <!-- Feet -->
+      <line x1="82" y1="182" x2="74" y2="196" stroke="#D4A843" stroke-width="3"/>
+      <line x1="82" y1="182" x2="82" y2="197" stroke="#D4A843" stroke-width="3"/>
+      <line x1="82" y1="182" x2="90" y2="196" stroke="#D4A843" stroke-width="3"/>
+      <line x1="108" y1="182" x2="100" y2="196" stroke="#D4A843" stroke-width="3"/>
+      <line x1="108" y1="182" x2="108" y2="197" stroke="#D4A843" stroke-width="3"/>
+      <line x1="108" y1="182" x2="116" y2="196" stroke="#D4A843" stroke-width="3"/>
+      <!-- Laptop -->
+      <rect x="108" y="148" width="44" height="28" rx="2" fill="#2A2A2A" transform="rotate(-5 108 148)"/>
+      <rect x="110" y="150" width="40" height="24" rx="1" fill="#3A3A3A" transform="rotate(-5 110 150)"/>
+      <rect x="104" y="174" width="52" height="5" rx="1" fill="#1A1A1A" transform="rotate(-5 104 174)"/>
+      <!-- Screen glow -->
+      <rect x="112" y="152" width="36" height="20" rx="1" fill="#9D2235" opacity="0.2" transform="rotate(-5 112 152)"/>
+      <!-- Gear top right -->
+      <circle cx="148" cy="32" r="16" fill="none" stroke="#9D2235" stroke-width="3" opacity="0.6"/>
+      <circle cx="148" cy="32" r="8" fill="none" stroke="#9D2235" stroke-width="2" opacity="0.6"/>
+      <line x1="148" y1="14" x2="148" y2="50" stroke="#9D2235" stroke-width="3" opacity="0.6"/>
+      <line x1="130" y1="32" x2="166" y2="32" stroke="#9D2235" stroke-width="3" opacity="0.6"/>
+      <line x1="135" y1="19" x2="161" y2="45" stroke="#9D2235" stroke-width="2" opacity="0.6"/>
+      <line x1="161" y1="19" x2="135" y2="45" stroke="#9D2235" stroke-width="2" opacity="0.6"/>
+      <!-- Small gear -->
+      <circle cx="18" cy="100" r="10" fill="none" stroke="#9D2235" stroke-width="2" opacity="0.4"/>
+      <circle cx="18" cy="100" r="5" fill="none" stroke="#9D2235" stroke-width="1.5" opacity="0.4"/>
+      <line x1="18" y1="88" x2="18" y2="112" stroke="#9D2235" stroke-width="2" opacity="0.4"/>
+      <line x1="6" y1="100" x2="30" y2="100" stroke="#9D2235" stroke-width="2" opacity="0.4"/>
+    </svg>
+
+    <!-- Laurel wreaths bottom corners -->
+    <svg class="laurel-left" width="60" height="50" viewBox="0 0 60 50" fill="none">
+      <ellipse cx="10" cy="40" rx="8" ry="5" fill="#9D2235" transform="rotate(-30 10 40)"/>
+      <ellipse cx="20" cy="28" rx="8" ry="5" fill="#9D2235" transform="rotate(-15 20 28)"/>
+      <ellipse cx="32" cy="20" rx="8" ry="5" fill="#9D2235" transform="rotate(0 32 20)"/>
+      <ellipse cx="44" cy="26" rx="8" ry="5" fill="#9D2235" transform="rotate(15 44 26)"/>
+      <ellipse cx="52" cy="38" rx="8" ry="5" fill="#9D2235" transform="rotate(30 52 38)"/>
+      <line x1="5" y1="45" x2="55" y2="45" stroke="#9D2235" stroke-width="1.5"/>
+    </svg>
+
+    <svg class="laurel-right" width="60" height="50" viewBox="0 0 60 50" fill="none">
+      <ellipse cx="10" cy="40" rx="8" ry="5" fill="#9D2235" transform="rotate(-30 10 40)"/>
+      <ellipse cx="20" cy="28" rx="8" ry="5" fill="#9D2235" transform="rotate(-15 20 28)"/>
+      <ellipse cx="32" cy="20" rx="8" ry="5" fill="#9D2235" transform="rotate(0 32 20)"/>
+      <ellipse cx="44" cy="26" rx="8" ry="5" fill="#9D2235" transform="rotate(15 44 26)"/>
+      <ellipse cx="52" cy="38" rx="8" ry="5" fill="#9D2235" transform="rotate(30 52 38)"/>
+      <line x1="5" y1="45" x2="55" y2="45" stroke="#9D2235" stroke-width="1.5"/>
+    </svg>
+
+  </div>
+
+  <!-- Section divider -->
+  <div class="section-divider"></div>
+
+  <!-- ── PLEDGE CARD ── -->
+  <div class="pledge-card">
+    <div class="card-title">Owls Helping Owls</div>
+    <div class="card-intro">
+      As a graduate of Temple University's Department of Computer and Information Sciences,
+      I voluntarily make this pledge — not as an obligation, but as a reflection of the
+      values Temple instilled in me and my gratitude for the community that helped shape my career.
+    </div>
+
+    <ul class="pledge-list">
+      <li>
+        <span class="pledge-keyword">Mentor</span>
+        <span class="pledge-desc">Support future Temple CS students through mentorship, guidance, and professional connections — remembering that someone once opened a door for me.</span>
+      </li>
+      <li>
+        <span class="pledge-keyword">Share</span>
+        <span class="pledge-desc">Share my knowledge and experiences openly with fellow Temple Owls, whether they are just starting out or navigating the next step in their careers.</span>
+      </li>
+      <li>
+        <span class="pledge-keyword">Stay Connected</span>
+        <span class="pledge-desc">Stay connected with the Temple CIS community — through alumni events, online networks, and informal relationships.</span>
+      </li>
+      <li>
+        <span class="pledge-keyword">Champion</span>
+        <span class="pledge-desc">Consider Temple graduates for professional opportunities within my network and champion their talents to those around me.</span>
+      </li>
+      <li>
+        <span class="pledge-keyword">Represent</span>
+        <span class="pledge-desc">Represent Temple's values in my career — integrity, curiosity, and a commitment to building things that matter.</span>
+      </li>
+      <li>
+        <span class="pledge-keyword">Give Back</span>
+        <span class="pledge-desc">Give back in whatever way I can — a coffee chat, a resume review, a referral, a kind word at the right moment. No gesture is too small.</span>
+      </li>
+    </ul>
+
+    <div class="closing-text">
+      This pledge reflects my commitment to the Temple community that contributed to my growth —
+      and my belief that <strong>Owls are strongest when we lift each other up.</strong>
+    </div>
+
+    <div class="sig-row">
+      <div class="sig-field"><div class="sig-label">Your Name</div></div>
+      <div class="sig-field"><div class="sig-label">Temple CIS Class of ____</div></div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="poster-footer">
+    <div class="footer-left">OpenOwls Student Group · Temple University CIS</div>
+    <div class="footer-right">
+      openowls-at-temple.github.io
+      <svg class="footer-owl" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="#9D2235"/>
+        <ellipse cx="20" cy="24" rx="10" ry="12" fill="#F5F0E8"/>
+        <circle cx="20" cy="16" r="9" fill="#F5F0E8"/>
+        <circle cx="15" cy="15" r="4" fill="#9D2235"/>
+        <circle cx="25" cy="15" r="4" fill="#9D2235"/>
+        <circle cx="15" cy="15" r="2" fill="#1A0A0F"/>
+        <circle cx="25" cy="15" r="2" fill="#1A0A0F"/>
+        <polygon points="20,19 17,23 23,23" fill="#D4A843"/>
+      </svg>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
