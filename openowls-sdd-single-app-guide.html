@@ -304,16 +304,18 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
   <section>
     <div class="section-label">Section 01</div>
     <h2>The <span class="accent">OpenOwls SDD</span> File Structure</h2>
-    <p>Every OpenOwls project follows this layout. The two files at the root level are read first by Claude Code. Everything inside <code>ai_specs/</code> provides the full project context — what to build, how to build it, and how to ship it.</p>
+    <p>Every OpenOwls project follows this layout. The three files at the root level are read first by Claude Code. Everything inside <code>ai_specs/</code> provides the full project context — what to build, how to build it, and how to ship it.</p>
 
     <div class="file-tree">
       <div><span class="ft-folder">project-root/</span></div>
       <div>├── <span class="ft-root">CLAUDE.md</span>         <span class="ft-note">← tells Claude Code to read everything below, in order</span></div>
       <div>├── <span class="ft-root">progress.md</span>       <span class="ft-note">← living session status, updated after every work session</span></div>
+      <div>├── <span class="ft-root">batchrun.md</span>       <span class="ft-note">← scheduled/batch jobs and their latest run status</span></div>
       <div>└── <span class="ft-folder">ai_specs/</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">overview.md</span>              <span class="ft-note">← project goals, users, tech stack</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">features.md</span>              <span class="ft-note">← Phase 1 / 2 / 3 feature definitions</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">architecture-planning.md</span> <span class="ft-note">← folder structure, design decisions, API</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">design.md</span>                <span class="ft-note">← design principles, directives, non-functional requirements</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">domain-knowledge.md</span>      <span class="ft-note">← terminology, business rules, constraints</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">llm-integration.md</span>       <span class="ft-note">← model choice, prompts, context strategy, guardrails</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">conventions.md</span>           <span class="ft-note">← coding style, git rules, testing requirements</span></div>
@@ -332,6 +334,11 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
         <div class="fc-audience">Root · Session Memory</div>
         <p>Tracks what is done, in progress, and blocked. Read first every session since Claude Code has no memory between sessions.</p>
       </div>
+      <div class="file-card root-card">
+        <div class="fc-name">batchrun.md</div>
+        <div class="fc-audience">Root · Batch Run Status</div>
+        <p>A living record of the system's scheduled / batch jobs — e.g. nightly processes — and the status of their most recent runs. Read alongside <code>progress.md</code> to know what runs unattended.</p>
+      </div>
       <div class="file-card">
         <div class="fc-name">ai_specs/overview.md</div>
         <div class="fc-audience">Audience: Business Sponsor</div>
@@ -346,6 +353,11 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
         <div class="fc-name">ai_specs/architecture-planning.md</div>
         <div class="fc-audience">Audience: Architect / Engineer</div>
         <p>Folder structure, design decisions, data models, and API endpoints. For LLM-specific integration details, see <code>llm-integration.md</code>.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/design.md</div>
+        <div class="fc-audience">Audience: Architect / Engineer</div>
+        <p>Design principles, directives, specifications, patterns, and non-functional requirements — the "how it should be designed" companion to <code>architecture-planning.md</code>.</p>
       </div>
       <div class="file-card">
         <div class="fc-name">ai_specs/domain-knowledge.md</div>
@@ -406,6 +418,11 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
           <td>Core technical learning exercise — students make and justify design decisions</td>
         </tr>
         <tr>
+          <td>design.md</td>
+          <td><span class="badge badge-student">Students</span></td>
+          <td>Students set the design principles, directives, and non-functional requirements the build must follow</td>
+        </tr>
+        <tr>
           <td>domain-knowledge.md</td>
           <td><span class="badge badge-both">Faculty + Students</span></td>
           <td>Faculty seeds domain concepts. Students research and expand throughout the project.</td>
@@ -434,6 +451,11 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
           <td>progress.md</td>
           <td><span class="badge badge-student">Students</span></td>
           <td>Updated at the end of every work session throughout the project lifecycle</td>
+        </tr>
+        <tr>
+          <td>batchrun.md</td>
+          <td><span class="badge badge-student">Students</span></td>
+          <td>Students record the system's scheduled / batch jobs and keep their latest run status current</td>
         </tr>
       </tbody>
     </table>
@@ -571,6 +593,11 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
           <td>How to make and justify design decisions before writing a single line of code</td>
         </tr>
         <tr>
+          <td>design.md</td>
+          <td>System architect setting design principles and specifications</td>
+          <td>How to express design intent — principles, patterns, and quality attributes — that guides implementation without dictating every line</td>
+        </tr>
+        <tr>
           <td>domain-knowledge.md</td>
           <td>Domain expert briefing the engineering team</td>
           <td>How to research a problem space and surface the constraints that shape implementation</td>
@@ -599,6 +626,11 @@ description: The OpenOwls Spec-Driven Development getting started guide — how 
           <td>progress.md</td>
           <td>Engineering team's daily standup and sprint tracker</td>
           <td>How to maintain continuity across sessions and communicate project state clearly</td>
+        </tr>
+        <tr>
+          <td>batchrun.md</td>
+          <td>Operations engineer tracking scheduled jobs</td>
+          <td>How unattended, scheduled work is planned, monitored, and recovered when it fails</td>
         </tr>
       </tbody>
     </table>
