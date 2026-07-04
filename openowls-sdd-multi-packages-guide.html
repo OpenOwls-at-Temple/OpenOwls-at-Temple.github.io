@@ -402,20 +402,22 @@ description: The OpenOwls SDD Suite Edition — applying Spec-Driven Development
   <section>
     <div class="section-label">Section 02</div>
     <h2>The <span class="accent">Two-Tier</span> Spec Structure</h2>
-    <p>The key idea: specs live at <strong>two levels</strong>. A <strong>shared layer at the root</strong> that every package inherits, and a <strong>private layer inside each package</strong>. Operational files — <code>CLAUDE.md</code> and the progress files — sit <strong>loose at each directory root</strong>; everything that is a spec goes <strong>inside an <code>ai_specs/</code> folder</strong>.</p>
+    <p>The key idea: specs live at <strong>two levels</strong>. A <strong>shared layer at the root</strong> that every package inherits, and a <strong>private layer inside each package</strong>. Operational files — <code>CLAUDE.md</code>, the progress files, and <code>batchrun.md</code> — sit <strong>loose at each directory root</strong>; everything that is a spec goes <strong>inside an <code>ai_specs/</code> folder</strong>.</p>
 
     <div class="file-tree">
       <span class="ft-label">Tier 1 — Shared, system-wide (the root)</span>
       <div><span class="ft-folder">your-suite/</span></div>
       <div>├── <span class="ft-root">CLAUDE.md</span>             <span class="ft-note">← system entry point — read first (loose)</span></div>
       <div>├── <span class="ft-root">project_progress.md</span>   <span class="ft-note">← stack-wide rollup + index to each package's progress (loose)</span></div>
+      <div>├── <span class="ft-root">batchrun.md</span>           <span class="ft-note">← suite-wide batch/scheduled jobs &amp; their latest run status (loose)</span></div>
       <div>└── <span class="ft-folder">ai_specs/</span>                 <span class="ft-note">← SHARED, system-wide specs</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">overview.md</span>              <span class="ft-note">← the whole stack's purpose</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">domain-knowledge.md</span>      <span class="ft-note">← shared terminology &amp; business rules</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">conventions.md</span>           <span class="ft-note">← one shared style / git / testing standard</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">llm-integration.md</span>       <span class="ft-note">← shared model choice &amp; guardrails</span></div>
       <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">auth-security.md</span>         <span class="ft-note">← shared identity model &amp; security posture</span></div>
-      <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="ft-file">architecture-planning.md</span> <span class="ft-note">← THE layering: package order &amp; dependency direction</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">architecture-planning.md</span> <span class="ft-note">← THE layering: package order &amp; dependency direction</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="ft-file">design.md</span>                <span class="ft-note">← shared design principles, directives, non-functional requirements</span></div>
     </div>
 
     <div class="file-tree">
@@ -434,7 +436,7 @@ description: The OpenOwls SDD Suite Edition — applying Spec-Driven Development
       <div>└── <span class="ft-note">… (add one folder per package: package3, …)</span></div>
     </div>
 
-    <div class="tip"><strong>Structural invariant:</strong> <code>CLAUDE.md</code> and the progress files are <strong>operational</strong> and must sit at the folder root — <strong>never inside <code>ai_specs/</code></strong>. Claude Code discovers <code>CLAUDE.md</code> by walking up the directory tree, so it has to live where you work and <em>point into</em> <code>ai_specs/</code>.</div>
+    <div class="tip"><strong>Structural invariant:</strong> <code>CLAUDE.md</code>, the progress files, and <code>batchrun.md</code> are <strong>operational</strong> and must sit at the folder root — <strong>never inside <code>ai_specs/</code></strong>. Claude Code discovers <code>CLAUDE.md</code> by walking up the directory tree, so it has to live where you work and <em>point into</em> <code>ai_specs/</code>. There is one <code>batchrun.md</code> for the whole suite — at the root, never inside a package.</div>
   </section>
 
   <!-- SECTION 3 -->
@@ -466,6 +468,11 @@ description: The OpenOwls SDD Suite Edition — applying Spec-Driven Development
           <td>architecture-planning.md</td>
           <td><span class="badge badge-root">Root</span></td>
           <td>The layering — which package depends on which, in which direction — is inherently <em>between</em> packages and can't live in any one of them.</td>
+        </tr>
+        <tr>
+          <td>design.md</td>
+          <td><span class="badge badge-root">Root</span></td>
+          <td>Shared design principles, directives, and non-functional requirements — the "how it should be designed" companion to the layering in <code>architecture-planning.md</code>.</td>
         </tr>
         <tr>
           <td>llm-integration.md</td>
@@ -506,6 +513,11 @@ description: The OpenOwls SDD Suite Edition — applying Spec-Driven Development
           <td>project_progress.md</td>
           <td><span class="badge badge-root">Root</span></td>
           <td>Stack-wide rollup; an index pointing to each package's <code>progress.md</code>.</td>
+        </tr>
+        <tr>
+          <td>batchrun.md</td>
+          <td><span class="badge badge-root">Root</span></td>
+          <td>One suite-wide record of scheduled / batch jobs and their latest run status, noting the owning package.</td>
         </tr>
       </tbody>
     </table>
