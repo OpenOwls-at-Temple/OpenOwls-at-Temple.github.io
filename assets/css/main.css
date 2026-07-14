@@ -488,3 +488,80 @@ footer a:hover { color: var(--gold); }
   }
   .dropdown-menu a { padding: 0.85rem 1.5rem 0.85rem 2.75rem; font-size: 1rem; }
 }
+
+/* ── BLOG POST CONTENT (rendered markdown) ── */
+.post-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 800;
+  color: var(--white); letter-spacing: -0.01em;
+  margin: 2.75rem 0 1rem;
+}
+.post-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem; font-weight: 700;
+  color: var(--white); margin: 2rem 0 0.6rem;
+}
+.post-content p { margin-bottom: 1rem; }
+.post-content ul, .post-content ol { margin: 0 0 1.1rem 1.25rem; }
+.post-content li { margin-bottom: 0.4rem; }
+.post-content a { color: var(--gold); }
+.post-content strong { color: var(--white); }
+
+.post-content code {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  color: #93C5FD;
+  background: rgba(147,197,253,0.08);
+  padding: 1px 6px; border-radius: 4px;
+}
+.post-content pre {
+  background: #0B1120;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem;
+  margin: 1.25rem 0;
+  overflow-x: auto;
+}
+.post-content pre code {
+  background: none; padding: 0;
+  color: #c9d5e6; font-size: 0.8rem; line-height: 1.7;
+}
+
+.post-content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.88rem;
+}
+.post-content th {
+  text-align: left;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--gold);
+  font-size: 0.7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.post-content td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.post-content td code { white-space: nowrap; }
+
+.post-content blockquote {
+  border-left: 3px solid var(--gold);
+  background: rgba(245,197,24,0.05);
+  padding: 0.75rem 1.25rem;
+  margin: 1.25rem 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--gray-light);
+}
+.post-content blockquote p:last-child { margin-bottom: 0; }
+.post-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
