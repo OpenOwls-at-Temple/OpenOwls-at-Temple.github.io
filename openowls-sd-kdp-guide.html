@@ -1,0 +1,735 @@
+---
+layout: default
+title: OpenOwls SD-KDP — Spec-Driven Knowledge Distillation Process
+description: The OpenOwls SD-KDP guide — applying spec-driven thinking to knowledge distillation projects, where you declare an Oracle and build a distilled, queryable knowledge base in its voice.
+---
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+  /* ── PAGE HERO ── */
+  .sdd-hero {
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--border);
+    padding: 8rem 3rem 5rem;
+    text-align: center;
+  }
+
+  .sdd-hero .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(245,197,24,0.1);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+  }
+
+  .sdd-hero .hero-badge::before { content: "●"; font-size: 0.5rem; }
+
+  .sdd-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 760px;
+    margin: 0 auto 1.25rem;
+  }
+
+  .sdd-hero h1 .accent { color: var(--gold); }
+
+  .sdd-hero .hero-sub {
+    font-size: 1.1rem;
+    color: var(--gray-light);
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── PAGE CONTENT ── */
+  .sdd-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem 6rem;
+  }
+
+  .sdd-page section { margin-bottom: 5rem; }
+
+  /* ── SECTION HEADERS ── */
+  .sdd-page h2 {
+    font-size: clamp(1.5rem, 3vw, 1.9rem);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sdd-page h2 .accent { color: var(--gold); }
+
+  .sdd-page h3 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 1.75rem 0 0.5rem;
+  }
+
+  .sdd-page p {
+    color: var(--gray-light);
+    margin-bottom: 0.9rem;
+    line-height: 1.75;
+  }
+
+  /* ── CODE ── */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: #93C5FD;
+    background: rgba(147,197,253,0.08);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* ── FILE TREE ── */
+  .file-tree {
+    background: #0B1120;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 2;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .ft-folder { color: var(--gold); font-weight: 500; }
+  .ft-file   { color: #93C5FD; }
+  .ft-root   { color: #F5C518; font-weight: 600; }
+  .ft-note   { color: #3E5270; font-style: italic; }
+
+  /* ── FILE CARDS ── */
+  .file-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    margin: 1.5rem 0;
+  }
+
+  .file-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.4rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .file-card:hover { border-color: rgba(245,197,24,0.3); transform: translateY(-2px); }
+  .file-card.root-card { border-color: rgba(245,197,24,0.3); }
+
+  .fc-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-bottom: 0.35rem;
+  }
+
+  .fc-audience {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+  }
+
+  .file-card p {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--gray);
+    margin: 0;
+  }
+
+  /* ── STEPS ── */
+  .steps { list-style: none; counter-reset: step; margin: 1.75rem 0; }
+
+  .steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.25rem;
+    align-items: start;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-family: var(--font-display);
+    color: var(--navy);
+    background: var(--gold);
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-body h3 { margin-top: 0.6rem; }
+
+  /* ── PROMPT BOX ── */
+  .prompt-box {
+    background: #0B1120;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .prompt-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .prompt-box p {
+    font-size: 0.875rem;
+    color: var(--gray);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .prompt-box em {
+    color: #93C5FD;
+    font-style: normal;
+  }
+
+  /* ── TIP ── */
+  .tip {
+    background: rgba(245,197,24,0.05);
+    border: 1px solid rgba(245,197,24,0.15);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+    color: var(--gray-light);
+  }
+
+  .tip strong { color: var(--white); }
+  .tip a { color: var(--gold); }
+
+  /* ── TABLE ── */
+  .sdd-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    font-size: 0.875rem;
+  }
+
+  .sdd-table th {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sdd-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--gray-light);
+    vertical-align: top;
+  }
+
+  .sdd-table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* Comparison table — first column is prose, not a filename */
+  .compare-table td:first-child {
+    font-family: inherit;
+    font-size: 0.875rem;
+    color: var(--white);
+    font-weight: 600;
+    white-space: normal;
+  }
+
+  /* ── ORACLE TYPE CARDS ── */
+  .type-cards { grid-template-columns: repeat(3, 1fr); }
+
+  .type-cards .fc-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .type-cards.file-cards .fc-audience { color: var(--gold); opacity: 0.75; }
+
+  /* ── PIPELINE ── */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin: 1.75rem 0 1.25rem;
+  }
+
+  .pipe-stage {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.2rem;
+    position: relative;
+  }
+
+  .pipe-stage .ps-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.4rem;
+  }
+
+  .pipe-stage h4 {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 0 0 0.35rem;
+  }
+
+  .pipe-stage p {
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: var(--gray);
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .sdd-hero { padding: 6rem 1.5rem 3.5rem; }
+    .sdd-page { padding: 3rem 1.25rem 4rem; }
+    .file-cards, .type-cards { grid-template-columns: 1fr; }
+    .pipeline { grid-template-columns: 1fr; }
+    .steps li { grid-template-columns: 44px 1fr; gap: 1rem; }
+  }
+</style>
+
+<!-- HERO -->
+<div class="sdd-hero">
+  <div class="hero-badge">OpenOwls · Spec-Driven Knowledge Distillation</div>
+  <h1>Learning From<br><span class="accent">Your Oracle</span></h1>
+  <p class="hero-sub">SD-KDP applies spec-driven thinking to knowledge projects — declare whose knowledge you trust, then distill it into something you can query.</p>
+</div>
+
+<div class="sdd-page">
+
+  <!-- SECTION 1 -->
+  <section>
+    <div class="section-label">Section 01</div>
+    <h2>SDD Builds Software. <span class="accent">SD-KDP Builds Knowledge.</span></h2>
+    <p>OpenOwls has two spec-driven frameworks, and the first thing to get straight is which one your project needs.</p>
+    <p><strong>OpenOwls SDD</strong> — Spec-Driven <em>Development</em> — is for building software. You write specs describing an application, then Claude Code builds it. The thing that ships is a running app.</p>
+    <p><strong>OpenOwls SD-KDP</strong> — Spec-Driven <em>Knowledge Distillation Process</em> — is for building knowledge. You write specs describing a body of knowledge and whose interpretation of it you trust, then a pipeline collects that material and distills it into summaries you can query. The thing that ships is a distilled, searchable knowledge base. If your project is fundamentally a <em>summarization</em> or <em>digestion</em> project — reading a large pile of sources and turning it into answers — this is the framework for it.</p>
+
+    <table class="sdd-table compare-table">
+      <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>OpenOwls SDD</th>
+          <th>OpenOwls SD-KDP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>What you build</td>
+          <td>A running application</td>
+          <td>A distilled, queryable body of knowledge</td>
+        </tr>
+        <tr>
+          <td>What ships</td>
+          <td>Source code, deployed</td>
+          <td>Articles and FAQ in <code>wiki/</code>, plus a retrieval index</td>
+        </tr>
+        <tr>
+          <td>The specs describe</td>
+          <td>What to build, how to build it, how to ship it</td>
+          <td>Whose knowledge to trust, how to collect it, how to distill it</td>
+        </tr>
+        <tr>
+          <td>Who does the work</td>
+          <td>Claude Code, in an interactive session</td>
+          <td>A batch pipeline, running unattended overnight</td>
+        </tr>
+        <tr>
+          <td>Definition of done</td>
+          <td>A real user completes the primary workflow end to end</td>
+          <td>The Oracle's key questions are answered accurately, in the Oracle's voice</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>What the two share is the core habit: <strong>write the specs first, keep them in version control, and use them to brief your AI.</strong> SD-KDP simply points that habit at a different output.</p>
+
+    <div class="tip"><strong>Naming note:</strong> SD-KDP spec files use underscores (<code>domain_knowledge.md</code>), while OpenOwls SDD uses hyphens (<code>domain-knowledge.md</code>). They are different frameworks with different file sets — the naming difference is a useful reminder of which repository you are in.</div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section>
+    <div class="section-label">Section 02</div>
+    <h2>The <span class="accent">Oracle</span> — and Why Bias Is the Point</h2>
+    <p>An <strong>Oracle</strong> is a perspective plus the body of knowledge it trusts. It is the single most important decision in an SD-KDP project, and everything else in the specs follows from it.</p>
+
+    <div class="file-cards type-cards">
+      <div class="file-card">
+        <div class="fc-name">A person</div>
+        <div class="fc-audience">Canon: their own books, letters, talks</div>
+        <p>An individual whose philosophy you want to learn — an investor, a scientist, an author. The distilled base answers as that person would, from what they actually published.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">An institution</div>
+        <div class="fc-audience">Canon: official publications</div>
+        <p>An organization with an official position and a public record — a central bank, an agency, a standards body. The canon is that institution's own publications.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">A site or knowledge base</div>
+        <div class="fc-audience">Canon: the site's own articles</div>
+        <p>A curated reference whose editorial voice you trust. The canon is that site's articles, distilled into a form your project can query directly.</p>
+      </div>
+    </div>
+
+    <h3>Why commit to one lens</h3>
+    <p>Ask a general-purpose model a contested question and it will average every viewpoint into careful, hedged consensus. That is the right default for a general assistant and the wrong one when you are trying to learn how a <em>particular</em> expert thinks.</p>
+    <p>SD-KDP deliberately commits to one lens and one canon. That declared bias is not a flaw to be corrected — it is the product. <code>oracle.md</code> asks you to state the intended bias plainly, name the sources the Oracle trusts, and name the ones it rejects, so the bias is visible, reviewable, and in version control rather than smuggled in by accident.</p>
+    <p>The framework then defends that commitment at every stage: collection skips rejected sources outright, distillation runs a <strong>voice check</strong> that rejects drift toward generic consensus, and every article has an optional <em>"What this Oracle avoids / rejects"</em> section that keeps the contrast explicit.</p>
+
+    <div class="tip"><strong>The honesty guardrail.</strong> Declaring a bias is not the same as hiding one. <code>oracle.md</code> requires you to present distilled answers as <em>this Oracle's</em> view, not as objective universal truth. A reader should always know whose lens they are looking through.</div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section>
+    <div class="section-label">Section 03</div>
+    <h2>The <span class="accent">SD-KDP</span> File Structure</h2>
+    <p>Every SD-KDP project follows this layout. <code>CLAUDE.md</code> and <code>progress.md</code> sit at the root and are read first. The seven files inside <code>ai_specs/</code> are the source of truth; <code>src/</code> holds the pipeline that acts on them.</p>
+
+    <div class="file-tree">
+      <div><span class="ft-folder">sd-kdp/</span></div>
+      <div>├── <span class="ft-root">CLAUDE.md</span>                    <span class="ft-note">← entry point: read the specs in order, then progress.md</span></div>
+      <div>├── <span class="ft-root">progress.md</span>                  <span class="ft-note">← living session status + the run log</span></div>
+      <div>├── <span class="ft-root">.gitignore</span>                   <span class="ft-note">← ignores kdb/ and wiki/ CONTENTS (folders kept via .gitkeep)</span></div>
+      <div>├── <span class="ft-root">README.md</span></div>
+      <div>│</div>
+      <div>├── <span class="ft-folder">ai_specs/</span>                    <span class="ft-note">← the specs — source of truth, tracked in git</span></div>
+      <div>│&nbsp;&nbsp;&nbsp;├── <span class="ft-file">overview.md</span>              <span class="ft-note">← 1. goal and overall idea</span></div>
+      <div>│&nbsp;&nbsp;&nbsp;├── <span class="ft-file">domain_knowledge.md</span>      <span class="ft-note">← 2. terminology, rules, constraints</span></div>
+      <div>│&nbsp;&nbsp;&nbsp;├── <span class="ft-file">oracle.md</span>                <span class="ft-note">← 3. which Oracle to follow + the intended bias</span></div>
+      <div>│&nbsp;&nbsp;&nbsp;├── <span class="ft-file">collection_techniques.md</span> <span class="ft-note">← 4. where & how documents are downloaded</span></div>
+      <div>│&nbsp;&nbsp;&nbsp;├── <span class="ft-file">distillation_techniques.md</span> <span class="ft-note">← 5. how knowledge is distilled</span></div>
+      <div>│&nbsp;&nbsp;&nbsp;├── <span class="ft-file">output_format.md</span>         <span class="ft-note">← 6. the shape of distilled output</span></div>
+      <div>│&nbsp;&nbsp;&nbsp;└── <span class="ft-file">batch_process.md</span>         <span class="ft-note">← 7. scheduled jobs + backup</span></div>
+      <div>│</div>
+      <div>├── <span class="ft-folder">kdb/</span>                         <span class="ft-note">← collected raw documents (contents gitignored, backed up)</span></div>
+      <div>├── <span class="ft-folder">wiki/</span>                        <span class="ft-note">← distilled output (contents gitignored, backed up)</span></div>
+      <div>└── <span class="ft-folder">src/</span>                         <span class="ft-note">← the pipeline — tracked in git</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">collect.py</span>               <span class="ft-note">← downloads sources into kdb/</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">distill.py</span>               <span class="ft-note">← distills kdb/ into wiki/ per the specs</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">build_index.py</span>           <span class="ft-note">← builds the retrieval index over wiki/</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">backup.py</span>                <span class="ft-note">← backs up kdb/ and wiki/</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="ft-file">paths.py</span>                 <span class="ft-note">← every folder location, in one place</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="ft-file">run_batch.py</span>             <span class="ft-note">← orchestrates the nightly pipeline</span></div>
+    </div>
+
+    <p>Each spec file names its own audience at the top, in the order Claude Code should read them.</p>
+
+    <div class="file-cards">
+      <div class="file-card root-card">
+        <div class="fc-name">CLAUDE.md</div>
+        <div class="fc-audience">Root · Entry Point</div>
+        <p>Tells Claude Code to read the seven specs in order, then <code>progress.md</code>. Also carries the folder rules and the behavior rules — including the instruction never to neutralize the Oracle's bias.</p>
+      </div>
+      <div class="file-card root-card">
+        <div class="fc-name">progress.md</div>
+        <div class="fc-audience">Root · Session Memory + Run Log</div>
+        <p>What is done, in progress, and blocked — plus the run log table, one row per pipeline run. Read first every session, since neither the pipeline nor the assistant remembers the last one.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/overview.md</div>
+        <div class="fc-audience">Audience: Business Sponsor</div>
+        <p>The goal, who asks the questions, who maintains the pipeline, what "done" looks like, non-goals, and success metrics.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/domain_knowledge.md</div>
+        <div class="fc-audience">Audience: AI Assistant + Team</div>
+        <p>Domain summary, key terminology <em>as this Oracle uses it</em>, domain rules, common misconceptions, entities worth extracting, and known gaps in the canon.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/oracle.md</div>
+        <div class="fc-audience">Audience: Project Definer + AI</div>
+        <p>The lens. Oracle type, philosophy, the canon, explicitly rejected sources, voice and register, the key questions it must answer, and the bias and stance rules.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/collection_techniques.md</div>
+        <div class="fc-audience">Audience: Engineer + collect.py</div>
+        <p>The source inventory, how each type is downloaded, what gets filtered out at collection time, dedup by content hash, freshness policy, and failure handling.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/distillation_techniques.md</div>
+        <div class="fc-audience">Audience: Engineer + distill.py</div>
+        <p>The method: which techniques are switched on, merge and dedup policy, quality guardrails, chunking strategy, model choices, and cost controls.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/output_format.md</div>
+        <div class="fc-audience">Audience: The Distiller · The Contract</div>
+        <p>The exact shape of every file written into <code>wiki/</code> — front matter, section order, and the sources footer. The single most consequential file in the project.</p>
+      </div>
+      <div class="file-card">
+        <div class="fc-name">ai_specs/batch_process.md</div>
+        <div class="fc-audience">Audience: DevOps / Engineer</div>
+        <p>The four nightly stages and what each reads and writes, the schedule, incremental behavior, backup and retention, logging, and failure isolation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section>
+    <div class="section-label">Section 04</div>
+    <h2>The <span class="accent">Nightly</span> Pipeline</h2>
+    <p>SD-KDP does its real work while you sleep. <code>src/run_batch.py</code> runs four stages in order, and a scheduler — cron, Task Scheduler, or a scheduled task — triggers it once a night.</p>
+
+    <div class="pipeline">
+      <div class="pipe-stage">
+        <div class="ps-num">STAGE 01</div>
+        <h4>Collect</h4>
+        <p>Downloads the Oracle's canon into <code>kdb/</code>, hashing each document so unchanged sources are skipped.</p>
+      </div>
+      <div class="pipe-stage">
+        <div class="ps-num">STAGE 02</div>
+        <h4>Distill</h4>
+        <p>Reads <code>kdb/</code> and four specs, then writes articles and FAQ into <code>wiki/</code> in the Oracle's voice.</p>
+      </div>
+      <div class="pipe-stage">
+        <div class="ps-num">STAGE 03</div>
+        <h4>Index</h4>
+        <p>Chunks and embeds everything in <code>wiki/</code> into a vector index the chatbot queries.</p>
+      </div>
+      <div class="pipe-stage">
+        <div class="ps-num">STAGE 04</div>
+        <h4>Backup</h4>
+        <p>Snapshots <code>kdb/</code> and <code>wiki/</code>, which git does not track, and prunes old snapshots.</p>
+      </div>
+    </div>
+
+    <table class="sdd-table">
+      <thead>
+        <tr>
+          <th>Script</th>
+          <th>Reads</th>
+          <th>Writes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>src/collect.py</td>
+          <td><code>collection_techniques.md</code>, <code>kdb/links/</code></td>
+          <td><code>kdb/</code></td>
+        </tr>
+        <tr>
+          <td>src/distill.py</td>
+          <td><code>kdb/</code>, <code>oracle.md</code>, <code>domain_knowledge.md</code>, <code>distillation_techniques.md</code>, <code>output_format.md</code></td>
+          <td><code>wiki/</code></td>
+        </tr>
+        <tr>
+          <td>src/build_index.py</td>
+          <td><code>wiki/</code></td>
+          <td><code>.index/</code></td>
+        </tr>
+        <tr>
+          <td>src/backup.py</td>
+          <td><code>kdb/</code>, <code>wiki/</code></td>
+          <td><code>backups/</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Two rules the orchestrator enforces</h3>
+    <p><strong>A single bad source must never abort the run.</strong> A dead link or an unparseable PDF is logged and the run continues. Unattended jobs that fail completely because of one bad input are unattended jobs nobody trusts.</p>
+    <p><strong>Backup runs even when an earlier stage fails.</strong> If distillation blows up, the data you already collected still gets snapshotted. Every run appends a row to the run log in <code>progress.md</code>, with detailed logs under <code>.state/runs/</code>.</p>
+
+    <h3>Why kdb/ and wiki/ are not in git</h3>
+    <p>Both change every day — they are data, not code. Committing them would bloat the repository and bury real changes under churn. So the <strong>folders</strong> are tracked, via <code>.gitkeep</code>, while their <strong>contents</strong> are ignored, and the pipeline takes responsibility for backing them up instead.</p>
+    <p>What stays in git is the specs and the code — which together are everything needed to rebuild <code>kdb/</code> and <code>wiki/</code> from scratch.</p>
+
+    <div class="tip"><strong>If it is not in git, back it up on purpose.</strong> Gitignoring data is the right call, but it silently removes the safety net most students assume they have. <code>backup.py</code> keeps 14 timestamped snapshots by default — decide deliberately whether that is enough for your project.</div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section>
+    <div class="section-label">Section 05</div>
+    <h2>The Output Format <span class="accent">Is the Contract</span></h2>
+    <p><code>output_format.md</code> deserves its own section, because it is the file students underestimate most. It defines the exact shape of every artifact written into <code>wiki/</code>: the front matter, the section order, and the mandatory sources footer.</p>
+    <p>Change it, and the entire <code>wiki/</code> is reshaped on the next run — <strong>with no code changes at all</strong>. Adding a required section, switching to FAQ-only output, or introducing a glossary is a documentation edit, not an engineering task. That is the clearest demonstration in either framework of what "the spec is the source of truth" actually buys you.</p>
+
+    <h3>Leader → drill-down</h3>
+    <p>Every article is layered in a strict order, and the ordering is what makes answers fast to retrieve and easy to cite.</p>
+
+    <table class="sdd-table compare-table">
+      <thead>
+        <tr><th>Level</th><th>What it holds</th><th>Who it serves</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Leader</td>
+          <td>The TL;DR, in the Oracle's voice — one to three sentences</td>
+          <td>A reader who needs one glance</td>
+        </tr>
+        <tr>
+          <td>Body</td>
+          <td>The overview and the direct answer</td>
+          <td>Most questions, most of the time</td>
+        </tr>
+        <tr>
+          <td>Depth</td>
+          <td>Details, examples, and what the Oracle rejects</td>
+          <td>A reader going deep, or an answer that needs citing</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Four rules hold across every artifact: <strong>faithfulness first</strong> — every claim traces to a source span; <strong>provenance always</strong> — an accurate sources footer, every time; <strong>self-contained answers</strong> — each FAQ answer stands alone; and <strong>no padding</strong> — a short source produces a short artifact.</p>
+
+    <div class="tip"><strong>Never fabricate an example.</strong> The format has an Examples section, but it is to be omitted when the source provides none. An invented example is the fastest way to turn a distilled knowledge base into a plausible-sounding liability.</div>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section>
+    <div class="section-label">Section 06</div>
+    <h2>The <span class="accent">Six-Step</span> Workflow</h2>
+    <p>From an empty scaffold to a knowledge base you can query.</p>
+
+    <ol class="steps">
+      <li>
+        <div class="step-body">
+          <h3>Declare Your Oracle</h3>
+          <p>Before anything else, decide whose lens this project commits to and write <code>ai_specs/oracle.md</code>. Name the philosophy, the canon, the rejected sources, the voice, and the key questions the Oracle must be able to answer. Those key questions become your acceptance test.</p>
+          <div class="tip"><strong>Key question:</strong> can you name at least three sources this Oracle would reject? If not, you have chosen a topic, not an Oracle.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <h3>Fill In the Seven Specs — Claude.ai</h3>
+          <p>Upload the SD-KDP template files to Claude.ai and describe your Oracle and your sources. Start with <code>overview.md</code> and <code>oracle.md</code>; the remaining five follow from them. Generate one file at a time and review each before moving on.</p>
+          <div class="prompt-box">
+            <div class="prompt-label">Example prompt to Claude.ai</div>
+            <p>"These are my OpenOwls SD-KDP template files. I want to build a distilled knowledge base for <em>[the Oracle]</em>, drawing on <em>[the canon]</em>, for readers who are <em>[audience]</em>. Please fill in <code>overview.md</code> first, following the template structure exactly."</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <h3>Implement collect.py and distill.py</h3>
+          <p>The scaffold ships these as stubs with the TODOs marked and the governing spec named in each docstring. Implement collection for your actual sources first — PDFs, URL lists, feeds — then distillation. <code>requirements.txt</code> lists candidate libraries, all commented out: you choose the PDF parser, the fetcher, the model provider, and the vector store.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <h3>First Manual Run — One Source</h3>
+          <p>Run <code>python src/run_batch.py</code> by hand against a single source and read the output closely. Does it follow <code>output_format.md</code> exactly? Does it sound like the Oracle, or has it drifted to generic consensus? Does every claim trace to the source?</p>
+          <div class="tip"><strong>When output looks wrong, fix the spec — not the output.</strong> Editing a generated file fixes one file for one day. Editing the spec fixes every file, on every future run.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <h3>Schedule It Nightly</h3>
+          <p>Once a manual run is clean, hand it to a scheduler. Collection and distillation are hash-based, so only new or changed sources are reprocessed; <code>--force</code> rebuilds everything. Check the run log in <code>progress.md</code> the next morning.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <h3>Query the Distilled Base</h3>
+          <p>Point your chatbot at the index built over <code>wiki/</code> and ask the key questions from <code>oracle.md</code>. That is the acceptance test from <code>overview.md</code>: the right answers, in the Oracle's voice, sourced from the distilled base — not a generic averaged take.</p>
+          <div class="prompt-box">
+            <div class="prompt-label">Example Claude Code session opener</div>
+            <p>"Read <code>ai_specs/</code> in the order listed in <code>CLAUDE.md</code>, then <code>progress.md</code>. Last night's run is in the run log. The next task is <em>[task from progress.md]</em>. Let's begin."</p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- SECTION 7 -->
+  <section>
+    <div class="section-label">Section 07</div>
+    <h2>Golden Rules <span class="accent">for Distillers</span></h2>
+
+    <h3>Fix the spec, then re-run</h3>
+    <p>The spec files are the source of truth. If the distilled output is wrong, the spec that produced it was ambiguous. Correct the spec and re-run — hand-editing files in <code>wiki/</code> produces work that the next nightly run silently overwrites.</p>
+
+    <h3>Never neutralize the Oracle's bias</h3>
+    <p>Distilled answers that drift into balanced, hedged consensus have failed the project's whole purpose. If output stops sounding like the Oracle, treat it as a defect and tighten <code>oracle.md</code> or turn on stance reinforcement in <code>distillation_techniques.md</code>.</p>
+
+    <h3>Every claim traces to a source</h3>
+    <p>No outside facts, no invented examples, and an accurate sources footer on every artifact. A distilled base whose provenance cannot be checked is worse than no distilled base, because it looks authoritative.</p>
+
+    <h3>Never commit kdb/, wiki/, or secrets</h3>
+    <p>The data folders are gitignored on purpose and protected by <code>backup.py</code> instead. API keys live in <code>.env</code>, never in a spec file and never in a committed script.</p>
+
+    <h3>Update progress.md after every session</h3>
+    <p>Neither the pipeline nor the assistant remembers the previous session. Move finished items to done, note what is blocked, and keep the run log current — it is the only record of what the unattended job actually did.</p>
+
+    <h3>Respect the sources you collect</h3>
+    <p>Honor <code>robots.txt</code> and site terms, rate-limit your fetching, and record where every document came from. Collection is the one stage that touches systems you do not own.</p>
+  </section>
+
+  <!-- SECTION 8 -->
+  <section>
+    <div class="section-label">Section 08</div>
+    <h2>Motivation and <span class="accent">Rationale</span></h2>
+    <p>SD-KDP exists because a growing share of interesting student projects are not applications at all. They are attempts to read more material than a person can read and turn it into something answerable. That is a distinct engineering problem, and it deserves its own spec structure.</p>
+
+    <h3>Method lineage</h3>
+    <p>SD-KDP adapts Spec-Driven Development — specs first, in version control, used to brief the AI — from building <em>software</em> to building <em>distilled knowledge</em>. The habits transfer directly: name your audience, decide before you build, keep the decisions reviewable, and let the specs brief the machine rather than re-explaining yourself every session.</p>
+
+    <h3>Each spec still mirrors a real role</h3>
+    <p>As in OpenOwls SDD, every file has a named human audience. <code>overview.md</code> is written by a business sponsor. <code>collection_techniques.md</code> is a data engineer's document. <code>distillation_techniques.md</code> belongs to an ML engineer choosing methods and defending them. <code>batch_process.md</code> is an operations engineer's plan for work that runs while nobody is watching. And <code>oracle.md</code> has no equivalent in ordinary software work at all — it is closest to an editorial charter, which is exactly the kind of document engineers are rarely asked to write and increasingly need to.</p>
+
+    <h3>Why declared bias is a teaching device</h3>
+    <p>Students building AI tools are usually told to reduce bias. SD-KDP asks them to do something harder and more honest: choose a lens deliberately, write it down, name what it excludes, and label the output as that lens's view. Doing this once makes it permanently obvious that every knowledge system has a perspective — and that the dangerous ones are the systems whose perspective was never written down.</p>
+
+    <h3>Why the pipeline runs unattended</h3>
+    <p>Interactive work hides operational problems. A job that runs at 2am forces real questions: what happens when a source disappears, what happens when a stage fails halfway, how do you know the next morning whether it worked, and where does the data live if it is not in git. Those questions are the substance of production engineering, and a nightly distillation job is an unusually good place to meet them for the first time.</p>
+  </section>
+
+  <!-- CROSS-REFERENCE -->
+  <section>
+    <div class="section-label">Related</div>
+    <h2>Building <span class="accent">Software</span> Instead?</h2>
+    <p>If your project is an application rather than a body of knowledge, you want OpenOwls SDD. Start with the single-app guide; step up to the Suite Edition when your project is a stack of packages that build together in one repository.</p>
+    <div class="tip">→ <a href="{{ '/openowls-sdd-single-app-guide' | relative_url }}"><strong>OpenOwls SDD — Getting Started Guide (Single App)</strong></a><br>
+    For one stand-alone application, with nine specs and a phased build.</div>
+    <div class="tip">→ <a href="{{ '/openowls-sdd-multi-packages-guide' | relative_url }}"><strong>OpenOwls SDD — Suite Edition (Multi-Package Monorepo)</strong></a><br>
+    For a suite of stacked libraries, with a two-tier spec structure and a bottom-up build order.</div>
+  </section>
+
+</div>
