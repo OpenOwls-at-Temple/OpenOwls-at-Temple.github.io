@@ -1,0 +1,215 @@
+<title>Owl Jeopardy — Post Preview</title>
+<style>
+  /* ── OpenOwls design tokens (mirrored from assets/css/main.css) ── */
+  :root {
+    --navy: #0d1b2e;
+    --navy-mid: #122038;
+    --navy-light: #1a2f4e;
+    --gold: #f5c518;
+    --gold-dim: #c9a014;
+    --gold-pale: #fdf0b0;
+    --white: #f8f8f2;
+    --gray: #8a9bb0;
+    --gray-light: #c4cdd8;
+    --card-bg: #162235;
+    --border: rgba(245, 197, 24, 0.15);
+    /* Real site uses Syne (display) + DM Sans (body) via Google Fonts.
+       Font CDNs are blocked in this preview, so these fall back to
+       system sans — layout & color are faithful; the exact typefaces
+       will differ slightly from production. */
+    --font-display: 'Syne', 'Segoe UI', system-ui, sans-serif;
+    --font-body: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  }
+
+  * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body);
+    background: var(--navy);
+    color: var(--white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+  a:hover { color: var(--gold-pale); }
+
+  /* ── Preview-only banner (not part of the real page) ── */
+  .preview-banner {
+    background: repeating-linear-gradient(45deg, rgba(245,197,24,0.08) 0 12px, rgba(245,197,24,0.03) 12px 24px);
+    border-bottom: 1px solid var(--border);
+    color: var(--gray-light);
+    font-size: 0.78rem;
+    padding: 0.7rem 1.5rem;
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+  .preview-banner strong { color: var(--gold); }
+  .preview-banner code {
+    font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+    font-size: 0.72rem; color: #93C5FD;
+    background: rgba(147,197,253,0.08); padding: 1px 5px; border-radius: 4px;
+  }
+
+  /* ── Article shell (mirrors _layouts/post.html) ── */
+  main { padding-top: 3rem; }
+  article { max-width: 760px; margin: 0 auto; padding: 3rem; }
+  @media (max-width: 600px) { article { padding: 2rem 1.25rem; } }
+
+  .back-link {
+    font-size: 0.85rem; color: var(--gray);
+    display: inline-flex; align-items: center; gap: 0.4rem; margin-bottom: 2rem;
+  }
+  .back-link:hover { color: var(--gold); }
+
+  .section-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+  }
+  .post-title {
+    font-family: var(--font-display); font-size: 2.2rem; font-weight: 800;
+    letter-spacing: -0.02em; margin-bottom: 0.75rem; text-wrap: balance;
+  }
+  .post-meta {
+    display: flex; gap: 1.5rem; align-items: center;
+    margin-bottom: 2.5rem; flex-wrap: wrap;
+  }
+  .post-meta .author { color: var(--gray-light); font-size: 0.9rem; }
+  .post-meta .tag { color: var(--gray); font-size: 0.9rem; }
+
+  /* ── Post body (mirrors post.html inline + main.css .post-content) ── */
+  .post-content {
+    border-top: 1px solid var(--border); padding-top: 2rem;
+    color: var(--gray-light); line-height: 1.85; font-size: 1rem;
+  }
+  .post-content h2 {
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 800;
+    color: var(--white); letter-spacing: -0.01em; margin: 2.75rem 0 1rem;
+  }
+  .post-content p { margin-bottom: 1rem; }
+  .post-content ul { margin: 0 0 1.1rem 1.25rem; }
+  .post-content li { margin-bottom: 0.4rem; }
+  .post-content strong { color: var(--white); }
+  .post-content em { color: var(--gray-light); }
+
+  /* ── Developer cards (exactly the <style> block shipped in the post) ── */
+  .dev-section-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    margin: 3rem 0 0.5rem; display: block;
+  }
+  .dev-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 1.5rem 0 1rem; }
+  .dev-card {
+    background: var(--navy-mid); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.75rem;
+    display: grid; grid-template-columns: 96px 1fr; gap: 1.5rem; align-items: start;
+  }
+  .dev-photo {
+    width: 96px; height: 96px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--gold); background: var(--navy-light);
+  }
+  .dev-name {
+    font-family: var(--font-display); font-size: 1.15rem; font-weight: 800;
+    color: #fff; margin: 0 0 0.15rem; letter-spacing: -0.01em;
+  }
+  .dev-role { color: var(--gray); font-size: 0.85rem; margin: 0 0 0.6rem; }
+  .dev-links a { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600; color: var(--gold); }
+  .dev-body { grid-column: 1 / -1; margin-top: 0.25rem; }
+  .dev-body h4 { font-family: var(--font-display); font-size: 0.95rem; color: var(--gold-pale); margin: 1.1rem 0 0.35rem; }
+  .dev-body p { margin: 0 0 0.5rem; }
+  .dev-quote { border-left: 3px solid var(--gold-dim); padding-left: 1rem; color: var(--gray-light); font-style: italic; }
+  @media (max-width: 560px) {
+    .dev-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+    .dev-body { text-align: left; }
+  }
+
+  /* Preview-only: represents the empty photo (no file yet) with initials */
+  .dev-photo.placeholder {
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 800; font-size: 1.6rem;
+    color: var(--gold); background: var(--navy-light);
+  }
+</style>
+
+<div class="preview-banner">
+  Local preview · <code>_posts/2026-08-06-owl-jeopardy.md</code> · <strong>published: false</strong> (won't appear on the live site) · photos not added yet — shown as initials placeholders
+</div>
+
+<main>
+  <article>
+    <a class="back-link" href="#">← Back to project</a>
+
+    <div class="section-label">Student Blog</div>
+    <h1 class="post-title">Owl Jeopardy: Review Games That Build Themselves</h1>
+
+    <div class="post-meta">
+      <span class="author">✍️ Sample Student A, Sample Student B</span>
+      <span class="tag">📁 Owl Jeopardy</span>
+      <span class="tag">🗓 August 2026</span>
+    </div>
+
+    <div class="post-content">
+      <p><strong>Owl Jeopardy</strong> is a web app that turns any Temple course into a ready-to-play Jeopardy review game. A professor pastes in their Canvas course ID, and the app generates the categories and questions automatically — no more typing out a board by hand the night before the last lecture.</p>
+
+      <h2>What It Does</h2>
+      <ul>
+        <li><strong>Auto-generates the board</strong> — pulls slides, notes, and quiz content from Canvas and uses an LLM to write Jeopardy-style categories and clue/answer pairs.</li>
+        <li><strong>Live, playable game</strong> — launches a real game board in the browser, with clue reveals and a running scoreboard.</li>
+        <li><strong>Buzzer play for teams</strong> — students buzz in from their own devices; the board syncs everyone in real time.</li>
+        <li><strong>Zero manual entry</strong> — the whole game is built from the actual course material, so it's always on-topic.</li>
+      </ul>
+
+      <h2>How It Works</h2>
+      <p>The frontend is a <strong>React</strong> game board that updates in real time. A <strong>Node.js</strong> backend handles <strong>Canvas API</strong> ingestion — fetching a course's materials and normalizing them into clean text. That text goes to the <strong>Claude API</strong>, which generates the categories and Q&amp;A pairs. Finally, <strong>WebSockets</strong> keep every player's buzzer and the shared scoreboard in sync during live play.</p>
+
+      <h2>Who It's For</h2>
+      <ul>
+        <li><strong>Primary audience</strong> — Temple faculty who want an engaging last-lecture review without spending hours building questions in tools like JeopardyLabs.</li>
+        <li><strong>Secondary audience</strong> — students, who get a review session drawn straight from their own course content instead of generic trivia.</li>
+      </ul>
+
+      <span class="dev-section-label">Meet the Developers</span>
+
+      <div class="dev-grid">
+
+        <div class="dev-card">
+          <div class="dev-photo placeholder">SA</div>
+          <div>
+            <p class="dev-name">Sample Student A</p>
+            <p class="dev-role">Frontend &amp; real-time play · CS '26</p>
+            <p class="dev-links"><a href="#">in&nbsp;·&nbsp;LinkedIn</a></p>
+          </div>
+          <div class="dev-body">
+            <p class="dev-quote">I'd never shipped anything real-time before — watching four laptops buzz in on one board for the first time was the moment it clicked.</p>
+            <h4>My Journey</h4>
+            <p>I owned the React game board and the buzzer experience. I started with a static board, then layered in the live state once the WebSocket channel was working. Most of my sprint was spent making the game <em>feel</em> good — clean reveals, clear whose-turn-it-is cues, and a scoreboard you can read from the back of a classroom.</p>
+            <h4>What I Learned</h4>
+            <p>How to reason about shared state across many clients, when to trust the server as the source of truth, and how to keep a UI responsive while the network catches up. On the team side, I learned to cut scope: our first design had way more features than we could finish, and picking the core loop made the whole thing possible.</p>
+            <h4>Biggest Challenge</h4>
+            <p>Race conditions on the buzzer. Two players hitting buzz within milliseconds would both light up. I fixed it by moving the "first-to-buzz" decision entirely to the server and locking the round the instant it received the first event — the clients just render what the server decides.</p>
+          </div>
+        </div>
+
+        <div class="dev-card">
+          <div class="dev-photo placeholder">SB</div>
+          <div>
+            <p class="dev-name">Sample Student B</p>
+            <p class="dev-role">Canvas ingestion &amp; AI question generation · CS '26</p>
+            <p class="dev-links"><a href="#">in&nbsp;·&nbsp;LinkedIn</a></p>
+          </div>
+          <div class="dev-body">
+            <p class="dev-quote">Getting the model to write questions that were actually <em>fair</em> — not too easy, not impossibly obscure — was the whole game.</p>
+            <h4>My Journey</h4>
+            <p>I built the Node backend that pulls a course from the Canvas API and the prompt pipeline that turns that content into a Jeopardy board. A lot of the work was unglamorous: cleaning messy slide text so the model had something coherent to work from.</p>
+            <h4>What I Learned</h4>
+            <p>Practical prompt engineering — how much structure the model needs, and how to make it return clean JSON I could drop straight into the board. I also learned how real APIs behave: pagination, rate limits, and the difference between the docs and reality.</p>
+            <h4>Biggest Challenge</h4>
+            <p>Keeping question difficulty consistent across categories. My first prompts gave wildly uneven boards. I ended up giving the model explicit difficulty tiers per row and a few worked examples, which made the $200 clues reliably harder than the $100 ones.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <h2>What's Next</h2>
+      <p>We'd love to add a professor dashboard for editing generated questions before game day, and support for image-based clues. Interested Owls can check out the <a href="#">repo</a> or reach out — we're happy to onboard the next team.</p>
+    </div>
+  </article>
+</main>
