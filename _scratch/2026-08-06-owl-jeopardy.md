@@ -146,43 +146,43 @@ player's buzzer and the shared scoreboard in sync during live play.
       </p>
 
       <h4>My Journey</h4>
-      <p>
-        I worked on the AI question generation pipeline, starting from a
-        streaming-based approach and building outward. I built slide ingestion
-        so the app could generate questions directly from uploaded PPTX and PDF
-        files, then wired up streaming generation over SSE with NDJSON so
-        questions show up as they're produced instead of making users wait on
-        one big response. Later I moved the LLM calls behind a LiteLLM
-        abstraction layer and rebuilt that part as a FastAPI backend, which let
-        us swap providers without rewriting the pipeline. I also added a
-        localStorage cache so we weren't re-generating the same questions on
-        every reload, and spent a chunk of time on difficulty calibration so
-        the generated questions actually scaled the way a real Jeopardy board
-        should.
-      </p>
+<p>
+  I worked on the AI question generation pipeline, starting from a
+  streaming-based approach and building outward. I built slide ingestion
+  so the app could generate questions directly from uploaded PPTX and PDF
+  files, then wired up streaming generation over SSE with NDJSON so
+  questions show up as they're produced instead of making users wait on
+  one big response. Later I moved the LLM calls behind a LiteLLM
+  abstraction layer and rebuilt that part as a FastAPI backend, which let
+  us swap providers without rewriting the pipeline. I also added a
+  localStorage cache so we weren't re-generating the same questions on
+  every reload, and spent a chunk of time on difficulty calibration so
+  the generated questions actually scaled the way a real Jeopardy board
+  should.
+</p>
 
-      <h4>What I Learned</h4>
-      <p>
-        I learned How to design around a streaming response instead of a single request —
-        SSE and NDJSON force you to think about partial state and what the UI
-        does with a clue that's half-formed. I also learned why an abstraction
-        layer like LiteLLM matters in practice: once the backend didn't care
-        which provider it was talking to, testing and swapping models got a lot
-        less painful. On top of that, working off Professor Pang's architectural
-        guidance and syncing our specs with it taught me how much clearer a
-        build goes when the design doc is kept honest and current instead of
-        written once and forgotten.
-      </p>
+<h4>What I Learned</h4>
+<p>
+  How to design around a streaming response instead of a single request —
+  SSE and NDJSON force you to think about partial state and what the UI
+  does with a clue that's half-formed. I also learned why an abstraction
+  layer like LiteLLM matters in practice: once the backend didn't care
+  which provider it was talking to, testing and swapping models got a lot
+  less painful. On top of that, working off Professor Pang's architectural
+  guidance and syncing our specs with it taught me how much clearer a
+  build goes when the design doc is kept honest and current instead of
+  written once and forgotten.
+</p>
 
-      <h4>Biggest Challenge</h4>
-      <p>
-         Merging the AI pipeline branch back into master. It had drifted enough
-          from the mainline — new endpoints, the streaming changes, the caching
-          layer — that the merge surfaced a bunch of small conflicts and edge
-          cases that only showed up once everything had to work together. Cleaning
-          that up, plus recalibrating difficulty after the merge, took longer than
-          writing any single feature did.
-      </p>
+<h4>Biggest Challenge</h4>
+<p>
+  Merging the AI pipeline branch back into master. It had drifted enough
+  from the mainline — new endpoints, the streaming changes, the caching
+  layer — that the merge surfaced a bunch of small conflicts and edge
+  cases that only showed up once everything had to work together. Cleaning
+  that up, plus recalibrating difficulty after the merge, took longer than
+  writing any single feature did.
+</p>
     </div>
   </div>
 
