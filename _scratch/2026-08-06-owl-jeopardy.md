@@ -136,7 +136,7 @@ player's buzzer and the shared scoreboard in sync during live play.
       <p class="dev-name">Wei Lun Chang</p>
       <p class="dev-role">LLM pipeline & backend integration & AI question generation · CS '26</p>
       <p class="dev-links">
-        <a href="https://www.linkedin.com/in/USERNAME/" target="_blank" rel="noopener">in&nbsp;·&nbsp;LinkedIn</a>
+        <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener">in&nbsp;·&nbsp;LinkedIn</a>
       </p>
     </div>
     <div class="dev-body">
