@@ -145,7 +145,7 @@ player's buzzer and the shared scoreboard in sync during live play.
         not too easy, not impossibly obscure — was the whole game.
       </p>
 
-      <h4>My Journey</h4>
+<h4>My Journey</h4>
 <p>
   I worked on the AI question generation pipeline, starting from a
   streaming-based approach and building outward. I built slide ingestion
