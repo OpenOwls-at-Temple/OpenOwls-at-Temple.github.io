@@ -1,0 +1,179 @@
+---
+layout: post
+title: "Owl-Street"
+author: "Sample Student A, Sample Student B, Sample Student C"
+project: "Owl Jeopardy"
+project_url: /projects/owl-street/
+date: 2026-08-06
+category: student
+published: false
+---
+
+<style>
+  .dev-section-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    margin: 3rem 0 0.5rem; display: block;
+  }
+  .dev-grid {
+    display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 1.5rem 0 1rem;
+  }
+  .dev-card {
+    background: var(--navy-mid); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.75rem;
+    display: grid; grid-template-columns: 96px 1fr; gap: 1.5rem; align-items: start;
+  }
+  .dev-photo {
+    width: 96px; height: 96px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--gold); background: var(--navy-light);
+  }
+  .dev-name {
+    font-family: var(--font-display); font-size: 1.15rem; font-weight: 800;
+    color: #fff; margin: 0 0 0.15rem; letter-spacing: -0.01em;
+  }
+  .dev-role { color: var(--gray); font-size: 0.85rem; margin: 0 0 0.6rem; }
+  .dev-links a {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: 0.8rem; font-weight: 600; color: var(--gold);
+  }
+  .dev-body { grid-column: 1 / -1; margin-top: 0.25rem; }
+  .dev-body h4 {
+    font-family: var(--font-display); font-size: 0.95rem; color: var(--gold-pale);
+    margin: 1.1rem 0 0.35rem;
+  }
+  .dev-body p { margin: 0 0 0.5rem; }
+  .dev-quote {
+    border-left: 3px solid var(--gold-dim); padding-left: 1rem;
+    color: var(--gray-light); font-style: italic;
+  }
+  @media (max-width: 560px) {
+    .dev-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+    .dev-body { text-align: left; }
+  }
+</style>
+
+**Owl Street** is a web app ...
+
+## What It Does
+
+- **Auto-generates the board** — pulls slides, notes, and quiz content from Canvas and uses an LLM to write Jeopardy-style categories and clue/answer pairs.
+- **Live, playable game** — launches a real game board in the browser, with clue reveals and a running scoreboard.
+- **Buzzer play for teams** — students buzz in from their own devices; the board syncs everyone in real time.
+- **Zero manual entry** — the whole game is built from the actual course material, so it's always on-topic.
+
+<!-- ![The Owl Jeopardy game board](/assets/images/owl-jeopardy-demo.png) -->
+<!-- Live demo: coming soon · Code: https://github.com/OpenOwls-at-Temple -->
+
+## How It Works
+
+The frontend is a **React** game board that updates in real time. A **Node.js**
+backend handles ... TBD
+
+## Who It's For
+
+- **Primary audience** — TBD
+- **Secondary audience** — TBD
+
+<span class="dev-section-label">Meet the Developers</span>
+
+<!-- NOTE: Sample/placeholder people below — swap in the real students,
+     their photos (assets/images/team/), and their own words. -->
+<div class="dev-grid">
+
+  <div class="dev-card">
+    <img class="dev-photo" src="/assets/images/team/sample-student-a.jpg" alt="Sample Student A">
+    <div>
+      <p class="dev-name">Sample Student A</p>
+      <p class="dev-role">Frontend & real-time play · CS '26</p>
+      <p class="dev-links">
+        <a href="https://www.linkedin.com/in/USERNAME/" target="_blank" rel="noopener">in&nbsp;·&nbsp;LinkedIn</a>
+      </p>
+    </div>
+    <div class="dev-body">
+      <p class="dev-quote">
+        I'd never shipped anything real-time before — watching four laptops
+        buzz in on one board for the first time was the moment it clicked.
+      </p>
+
+      <h4>My Journey</h4>
+      <p>
+        I owned the React game board and the buzzer experience. I started with a
+        static board, then layered in the live state once the WebSocket channel
+        was working. Most of my sprint was spent making the game <em>feel</em>
+        good — clean reveals, clear whose-turn-it-is cues, and a scoreboard you
+        can read from the back of a classroom.
+      </p>
+
+      <h4>What I Learned</h4>
+      <p>
+        How to reason about shared state across many clients, when to trust the
+        server as the source of truth, and how to keep a UI responsive while the
+        network catches up. On the team side, I learned to cut scope: our first
+        design had way more features than we could finish, and picking the core
+        loop made the whole thing possible.
+      </p>
+
+      <h4>Biggest Challenge</h4>
+      <p>
+        Race conditions on the buzzer. Two players hitting buzz within
+        milliseconds would both light up. I fixed it by moving the
+        "first-to-buzz" decision entirely to the server and locking the round
+        the instant it received the first event — the clients just render what
+        the server decides.
+      </p>
+    </div>
+  </div>
+
+  <div class="dev-card">
+    <img class="dev-photo" src="/assets/images/team/sample-student-b.jpg" alt="Wei Lun Chang">
+    <div>
+      <p class="dev-name">John Doe</p>
+      <p class="dev-role">LLM pipeline & backend integration & AI question generation · CS '26</p>
+      <p class="dev-links">
+        <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener">in&nbsp;·&nbsp;LinkedIn</a>
+      </p>
+    </div>
+    <div class="dev-body">
+      <p class="dev-quote">
+        Getting the model to write questions that were actually <em>fair</em> —
+        not too easy, not impossibly obscure — was the whole game.
+      </p>
+
+<h4>My Journey</h4>
+<p>
+  I worked on the ...
+</p>
+
+<h4>What I Learned</h4>
+<p>
+  How to design around a streaming response instead of a single request —
+  SSE and NDJSON force you to think about partial state and what the UI
+  does with a clue that's half-formed. I also learned why an abstraction
+  layer like LiteLLM matters in practice: once the backend didn't care
+  which provider it was talking to, testing and swapping models got a lot
+  less painful. On top of that, working off Professor Pang's architectural
+  guidance and syncing our specs with it taught me how much clearer a
+  build goes when the design doc is kept honest and current instead of
+  written once and forgotten.
+</p>
+
+<h4>Biggest Challenge</h4>
+<p>
+  Merging the AI pipeline branch back into master. It had drifted enough
+  from the mainline — new endpoints, the streaming changes, the caching
+  layer — that the merge surfaced a bunch of small conflicts and edge
+  cases that only showed up once everything had to work together. Cleaning
+  that up, plus recalibrating difficulty after the merge, took longer than
+  writing any single feature did.
+</p>
+    </div>
+  </div>
+
+</div>
+
+## What's Next
+
+We'd love to add a professor dashboard for editing generated questions before
+game day, and support for image-based clues. Interested Owls can check out the
+[repo](https://github.com/OpenOwls-at-Temple) or reach out — we're happy to
+onboard the next team.
