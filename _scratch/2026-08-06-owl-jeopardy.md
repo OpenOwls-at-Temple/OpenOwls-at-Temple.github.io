@@ -96,13 +96,13 @@ player's buzzer and the shared scoreboard in sync during live play.
       </p>
     </div>
     <div class="dev-body">
-      <p class="dev-quote">
+<p class="dev-quote">
           Building the first working version taught me how important product
 decisions and architecture are before adding more advanced features.
       </p>
 
-      <h4>My Journey</h4>
-      <p>
+<h4>My Journey</h4>
+<p>
   I led the initial Phase 1 prototype of Owl Jeopardy using AI-assisted
   development tools. I defined the core product flow and used Claude to help
   build the question bank management system, game setup flow, Jeopardy board,
@@ -123,8 +123,8 @@ decisions and architecture are before adding more advanced features.
   rebuilding the core game experience.
 </p>
 
-      <h4>What I Learned</h4>
-     <p>
+<h4>What I Learned</h4>
+<p>
   This project taught me how to use AI as part of a real software development
   workflow rather than just as a code generator. I learned how to break an
   open-ended product idea into smaller features, write clearer prompts and
@@ -138,7 +138,7 @@ decisions and architecture are before adding more advanced features.
   careful human judgment.
 </p>
 
-      <h4>Biggest Challenge</h4>
+<h4>Biggest Challenge</h4>
       <p>
   The biggest challenge was keeping the AI-generated implementation consistent
   as the project grew. Different features were often generated at different
