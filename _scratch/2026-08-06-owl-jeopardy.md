@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Owl Jeopardy: Review Games That Build Themselves"
-author: "Sample Student A, Sample Student B"
+author: "Zirong Wang, Wei Lun Chang"
 project: "Owl Jeopardy"
 project_url: /projects/owl-jeopardy/
 date: 2026-08-06
@@ -87,46 +87,71 @@ player's buzzer and the shared scoreboard in sync during live play.
 <div class="dev-grid">
 
   <div class="dev-card">
-    <img class="dev-photo" src="/assets/images/team/sample-student-a.jpg" alt="Sample Student A">
+    <img class="dev-photo" src="/assets/images/team/ZirongWang.jpg" alt="Zirong Wang">
     <div>
-      <p class="dev-name">Sample Student A</p>
-      <p class="dev-role">Frontend & real-time play · CS '26</p>
+      <p class="dev-name">Zirong Wang</p>
+      <p class="dev-role">Phase 1 Lead · Frontend, Authentication & Game Architecture · CS '26</p>
       <p class="dev-links">
-        <a href="https://www.linkedin.com/in/USERNAME/" target="_blank" rel="noopener">in&nbsp;·&nbsp;LinkedIn</a>
+        <a href="https://www.linkedin.com/in/zirong-wang-25ab31250" target="_blank" rel="noopener">in&nbsp;·&nbsp;LinkedIn</a>
       </p>
     </div>
     <div class="dev-body">
       <p class="dev-quote">
-        I'd never shipped anything real-time before — watching four laptops
-        buzz in on one board for the first time was the moment it clicked.
+          Building the first working version taught me how important product
+decisions and architecture are before adding more advanced features.
       </p>
 
       <h4>My Journey</h4>
       <p>
-        I owned the React game board and the buzzer experience. I started with a
-        static board, then layered in the live state once the WebSocket channel
-        was working. Most of my sprint was spent making the game <em>feel</em>
-        good — clean reveals, clear whose-turn-it-is cues, and a scoreboard you
-        can read from the back of a classroom.
-      </p>
+  I led the initial Phase 1 prototype of Owl Jeopardy using AI-assisted
+  development tools. I defined the core product flow and used Claude to help
+  build the question bank management system, game setup flow, Jeopardy board,
+  scoring system, and persistent game state with React and TypeScript.
+</p>
+
+<p>
+  I also added Google authentication with Supabase, including protected routes,
+  sign-in and sign-out flows, user avatar display, and authentication state
+  management. My role involved deciding what the product should do, guiding the
+  AI through prompts and design documents, reviewing the generated code, testing
+  the application, and fixing integration issues.
+</p>
+
+<p>
+  I also designed the application structure with future phases in mind so that
+  AI-generated questions and slide-based content could be added without
+  rebuilding the core game experience.
+</p>
 
       <h4>What I Learned</h4>
-      <p>
-        How to reason about shared state across many clients, when to trust the
-        server as the source of truth, and how to keep a UI responsive while the
-        network catches up. On the team side, I learned to cut scope: our first
-        design had way more features than we could finish, and picking the core
-        loop made the whole thing possible.
-      </p>
+     <p>
+  This project taught me how to use AI as part of a real software development
+  workflow rather than just as a code generator. I learned how to break an
+  open-ended product idea into smaller features, write clearer prompts and
+  specifications, evaluate generated code, and iterate when the first solution
+  was not good enough.
+</p>
+
+<p>
+  I also learned that even when AI writes much of the implementation, decisions
+  about architecture, product scope, testing, and integration still require
+  careful human judgment.
+</p>
 
       <h4>Biggest Challenge</h4>
       <p>
-        Race conditions on the buzzer. Two players hitting buzz within
-        milliseconds would both light up. I fixed it by moving the
-        "first-to-buzz" decision entirely to the server and locking the round
-        the instant it received the first event — the clients just render what
-        the server decides.
-      </p>
+  The biggest challenge was keeping the AI-generated implementation consistent
+  as the project grew. Different features were often generated at different
+  times, so changes to authentication, state management, or the data model could
+  easily break something that had already been working.
+</p>
+
+<p>
+  I had to review the generated code, keep the architecture and design documents
+  up to date, test how new features interacted with the existing system, and
+  guide the AI to fix integration problems without creating unnecessary
+  rewrites.
+</p>
     </div>
   </div>
 
